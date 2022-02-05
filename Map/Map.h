@@ -124,7 +124,15 @@ public:
 		territory = t;
 	}
 	
-
+	void printEdgeList() {
+		cout << "[";
+		for (auto it = edgeL.begin(); it != edgeL.end(); it++) {
+			cout << it->getIdToNext() << "--> ";
+		}
+		cout << "]";
+		cout << endl;
+	}
+	
 
 
 };
@@ -140,5 +148,10 @@ public:
 
 	void addVertex(Vertex);
 	bool vertexAlreadyExist(int vertexId);
-
+	void addEdge(int idFromV, int idToV);
+	bool edgeAlreadyExist(int, int);
+	Vertex getVertexById(int);
+	void printGraph();
+	
+	
 };
