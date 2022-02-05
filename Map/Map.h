@@ -94,10 +94,11 @@ class Vertex { //declaration of the vertex class
 private:
 	int id;
 	Territory* territory;
-	list<Edge> edgeL;
+	
 
 
 public: 
+	list<Edge> edgeL;
 	Vertex();
 	Vertex(int, Territory*);
 	~Vertex(); //destructor
@@ -124,14 +125,8 @@ public:
 		territory = t;
 	}
 	
-	void printEdgeList() {
-		cout << "[";
-		for (auto it = edgeL.begin(); it != edgeL.end(); it++) {
-			cout << it->getIdToNext() << "--> ";
-		}
-		cout << "]";
-		cout << endl;
-	}
+	void printEdgeList();
+		
 	
 
 
@@ -139,9 +134,10 @@ public:
 class Map { //declaration of the map
 private:
 	 
-	vector<Vertex> vertices;
+	
 
 public:
+	vector<Vertex> vertices;
 	vector<Vertex> getVertices() {
 		return vertices;
 	}
