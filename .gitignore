@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Warzone.sln
+Warzone.vcxproj
+Warzone.vcxproj.filters
