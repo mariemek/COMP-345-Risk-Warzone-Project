@@ -2,6 +2,7 @@
 #define MAP_H
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <string>
 using namespace std;
 
@@ -31,10 +32,18 @@ public:
 };
 
 class Map { //declaration of the map
+private:
+	bool mapIsConnectedGraph();
+	bool continentsAreConnectedGraphs();
+	bool countriesBelongOneContinent();
+	void performDFS(const Territory*, unordered_set <string>&);
+
 public:
 	vector<Territory*> territories;
 	vector<Continent*> continents;
 
 	bool validate();
+
+
 };
 #endif
