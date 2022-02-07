@@ -3,6 +3,7 @@
 #include <vector>
 #include "../Map/Map.h"
 #include "../Cards/Cards.h"
+#include "../Orders/Orders.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ class Player {
 public:
 	unordered_set<Territory*> territories;
 	Hand* hand;
+	OrderList* orderlist;
 
 	vector<Territory*>& toAttack();
 	vector<Territory*>& toDefend();
