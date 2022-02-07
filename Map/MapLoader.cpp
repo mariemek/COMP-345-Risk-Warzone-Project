@@ -77,7 +77,7 @@ void MapLoader::processBorders(string& line, unordered_map<int, Territory*> coun
 
 	cout << "\tProcessing the borders of " << origincountry->name << ". Added borders to the following countries: ";
 
-	for (int i = 1; i < split.size(); i++) {
+	for (size_t i = 1, N = split.size(); i < N; i++) {
 		int bordercountrynumber = stoi(split[i]);
 		Territory* bordercountry = countries.at(bordercountrynumber);
 
