@@ -4,12 +4,32 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
-#include "Territory.h";
-#include "Continent.h";
+using namespace std;
 
-using std::string;
-using std::vector;
-using std::unordered_set;
+
+class Continent;
+class Territory;
+
+class Continent {
+public:
+	string name;
+	vector<Territory*> territories;
+
+	Continent(string&);
+};
+
+class Territory { //declaration of the territory class
+public:
+	string name;
+	Continent* continent; //name of the territory and continent
+//	Player* owner; // pointer to the owner of this territory
+	int nbOfArmy; // the number of army in the territory
+	vector<Territory*> adjacentTerritories; // adjacentTerritories 
+
+	Territory(string&, Continent*);
+	~Territory();//destructor
+
+};
 
 class Map { //declaration of the map
 private:
