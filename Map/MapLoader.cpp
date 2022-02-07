@@ -1,8 +1,9 @@
 #include <fstream>
 #include <string>
 #include <iostream>
-using namespace std;
 #include "MapLoader.h"
+
+using namespace std;
 
 Map& MapLoader::createMap(string& filename) {
 	const string continentsflag = "[continents]";

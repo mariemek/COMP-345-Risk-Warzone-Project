@@ -3,6 +3,8 @@
 
 #include "Map.h"
 
+using std::unordered_map;
+
 class MapLoader {
 public:
 	static Map& createMap(string& filename);
