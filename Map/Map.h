@@ -32,7 +32,9 @@ public:
 
 class Map { //declaration of the map
 public:
-	unordered_map<string, Territory*> territories;
-	unordered_map<string, Continent*> continents;
+	vector<Territory*> territories;
+	vector<Continent*> continents;
+
+	bool validate();
 };
 #endif
