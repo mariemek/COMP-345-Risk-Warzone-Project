@@ -50,6 +50,11 @@ bool Map::setContainsTerritories(unordered_set <string> nameset, vector<Territor
 }
 
 bool Map::countriesBelongOneContinent() {
+    for (Continent* continent : continents) {
+        for (const Territory* territory : continent->territories) {
+            if (continent != territory->continent) return false;
+        }
+    }
     return true;
 }
 
