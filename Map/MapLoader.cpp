@@ -23,6 +23,7 @@ Map& MapLoader::createMap(string& filename) {
 	// This will process every continent until there isn't any continent left.
 	while (getline(mapstream, line) && line != "") {
 		Continent& continent = createContinent(line);
+		gamemap->continents.push_back(&continent);
 
 		pair<int, Continent*> currentpair(continentnumber, &continent);
 		continents.insert(currentpair);
@@ -40,9 +41,10 @@ Map& MapLoader::createMap(string& filename) {
 	cout << endl << "Processing countries" << endl;
 	// This will process every countries until there isn't any left.
 	while (getline(mapstream, line) && line != "") {
-
 		int countrynumber;
+
 		Territory& territory = createTerritory(line, continents, countrynumber);
+		gamemap->territories.push_back(&territory);
 
 		pair<int, Territory*> currentpair(countrynumber, &territory);
 		countries.insert(currentpair);
@@ -65,6 +67,7 @@ Map& MapLoader::createMap(string& filename) {
 
 	return *gamemap;
 }
+
 void MapLoader::processBorders(string& line, unordered_map<int, Territory*> countries) {
 	vector<string>& split = splitInput(line, ' ');
 
