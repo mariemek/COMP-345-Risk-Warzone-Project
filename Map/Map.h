@@ -4,9 +4,10 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
+#include "../Player/Player.h"
 using namespace std;
 
-
+class Player;
 class Continent;
 class Territory;
 
@@ -22,7 +23,7 @@ class Territory { //declaration of the territory class
 public:
 	string name;
 	Continent* continent; //name of the territory and continent
-//	Player* owner; // pointer to the owner of this territory
+	Player* owner; // pointer to the owner of this territory
 	int nbOfArmy; // the number of army in the territory
 	vector<Territory*> adjacentTerritories; // adjacentTerritories 
 
