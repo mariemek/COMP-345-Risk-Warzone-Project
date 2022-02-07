@@ -17,24 +17,52 @@ bool Map::mapIsConnectedGraph() {
     const Territory* firstTerritory = territories[0];
     performDFS(firstTerritory, nameset);
 
-    for (const Territory* territory : territories) {
-        // If a the name of a territory isn't in the set, then it is unreachable, thus the map wouldn't be a
-        // connected map.
-        if (nameset.find(territory->name) == nameset.end()) {
-            return false;
-        }
-    }
+    if (!setContainsTerritories(nameset, territories)) return false;
 
     return true;
 
 }
-
+/*
+* Similar approach to mapIsConnectedGraph, but adding an end condition for the DFS is that if the current Territory's continent is not the same
+* as the next, then don't add it to the set.
+*/
 bool Map::continentsAreConnectedGraphs() {
+    for (Continent* continent : continents) {
+        unordered_set <string> nameset;
+        vector<Territory*>& continentTerritories = continent->territories;
+
+        const Territory* firstTerritory = continentTerritories[0];
+
+        performContinentDFS(firstTerritory, nameset);
+
+        if(!setContainsTerritories(nameset, continentTerritories)) return false;
+    }
+    return true;
+}
+
+bool Map::setContainsTerritories(unordered_set <string> nameset, vector<Territory*>& territories) {
+    for (const Territory* territory : territories) {
+        if (nameset.find(territory->name) == nameset.end()) {
+            return false;
+        }
+    }
     return true;
 }
 
 bool Map::countriesBelongOneContinent() {
     return true;
+}
+
+void Map::performContinentDFS(const Territory* territory, unordered_set <string>& nameset) {
+    if (nameset.find(territory->name) != nameset.end()) return;
+
+    nameset.insert(territory->name);
+
+    for (const Territory* adjacentTerritory : territory->adjacentTerritories) {
+        // If both territories have the same continent, then you can explore the next territory.
+        if(territory->continent == adjacentTerritory->continent) 
+            performDFS(adjacentTerritory, nameset);
+    }
 }
 
 void Map::performDFS(const Territory* territory, unordered_set <string>& nameset) {
@@ -44,9 +72,9 @@ void Map::performDFS(const Territory* territory, unordered_set <string>& nameset
     // Insert to the set before to avoid infinite loop.
     nameset.insert(territory->name);
 
-    for (const Territory* territory : territory->adjacentTerritories) {
+    for (const Territory* adjacentTerritory : territory->adjacentTerritories) {
         // Recursively visit the neighbors
-        performDFS(territory, nameset);
+        performDFS(adjacentTerritory, nameset);
     }
 }
 // Continent implementation

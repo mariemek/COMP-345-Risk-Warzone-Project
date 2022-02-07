@@ -37,6 +37,8 @@ private:
 	bool continentsAreConnectedGraphs();
 	bool countriesBelongOneContinent();
 	void performDFS(const Territory*, unordered_set <string>&);
+	void performContinentDFS(const Territory*, unordered_set <string>&);
+	bool setContainsTerritories(unordered_set <string>, vector<Territory*>&);
 
 public:
 	vector<Territory*> territories;
