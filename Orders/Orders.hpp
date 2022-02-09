@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <istream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include "../Map/Map.h"
@@ -12,9 +14,14 @@ class Territory;
 
 class Order {
 	bool validity = false;
-	static string* className;
+protected:
+	string* className;
+	friend ostream& operator<<(ostream&, Order&);
 public:
 	Order();
+	~Order();
+	Order(const Order& o);
+	Order& operator =(const Order& o);
 	bool getValidity();
 	string* getClassName();
 	//void execute();
