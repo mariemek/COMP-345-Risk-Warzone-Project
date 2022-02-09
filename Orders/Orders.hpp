@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "../Map/Map.h""
 
 using namespace std;
 // ------------------------------------------------------------
@@ -21,10 +22,8 @@ public:
 class OrderList {
 	// List as a vector for dynamic resizing of List
 	// List of Order objects
-
-	vector<Order*> list;
-
 public:
+	vector<Order*> list;
 	OrderList();
 	void move(int from, int to);
 	void remove(int position);
@@ -33,31 +32,31 @@ public:
 class Deploy : public Order {
 public:
 	Deploy();
-	void execute(int numOfArmies, string location);
+	void execute(int numOfArmies, static Territory* location);
 };
 
 class Advance : public Order {
 public:
 	Advance();
-	void execute(int numOfArmies, string from, string to);
+	void execute(int numOfArmies, Territory* from, Territory* to);
 };
 
 class Bomb : public Order {
 public:
 	Bomb();
-	void execute(string location);
+	void execute(Territory* location);
 };
 
 class Blockade : public Order {
 public:
 	Blockade();
-	void execute(string location);
+	void execute(Territory* location);
 };
 
 class Airlift : public Order {
 public:
 	Airlift();
-	void execute(int numOfArmies, string from, string to);
+	void execute(int numOfArmies, Territory* from, Territory* to);
 };
 
 class Negotiate : public Order {

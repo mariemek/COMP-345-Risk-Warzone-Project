@@ -24,20 +24,22 @@ OrderList::OrderList()
 
 void OrderList::move(int from, int to)
 {
-	Order* temp1 = list.at(from);
+	Order* temp = list.at(from);
 	if (from < to)
 	{
 		for (int i = from; i <= to; i++)
 		{
-
+			list.at(i) = list.at(i+1);
 		}
+		list.at(to) = temp;
 	}
 	else if (from > to)
 	{
 		for (int i = from; i >= to; i--)
 		{
-
+			list.at(i) = list.at(i-1);
 		}
+		list.at(to) = temp;
 	}
 	else if (from == to)
 	{
@@ -49,25 +51,30 @@ void OrderList::move(int from, int to)
 
 void OrderList::remove(int position)
 {
+	Order* temp = list.at(position);
+	list.erase(list.begin() + position);
+	delete temp;
+	temp = NULL;
+
 }
 
-void Deploy::execute(int numOfArmies, string location)
+void Deploy::execute(int numOfArmies, Territory* location)
 {
 }
 
-void Advance::execute(int numOfArmies, string from, string to)
+void Advance::execute(int numOfArmies, Territory* from, Territory* to)
 {
 }
 
-void Bomb::execute(string location)
+void Bomb::execute(Territory* location)
 {
 }
 
-void Blockade::execute(string location)
+void Blockade::execute(Territory* location)
 {
 }
 
-void Airlift::execute(int numOfArmies, string from, string to)
+void Airlift::execute(int numOfArmies, Territory* from, Territory* to)
 {
 }
 
