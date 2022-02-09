@@ -13,16 +13,14 @@
 //create an enum variable to keep track of the current state in the switch statement
 
 
-enum currentStates{
-    START,MAP_LOADED, MAP_VALIDATED,PLAYERS_ADDED,ASSIGN_REINFORCEMENT,ISSUE_ORDERS,EXECUTE_ORDERS,WIN
-};
+
 
 
 //create a function pointer to other functions which acts like states
 
 //void (*state)();
 
-class Game{
+class GameEngine{
 
 public:
 
