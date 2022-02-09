@@ -11,11 +11,11 @@ class Territory;
 // ------------------------------------------------------------
 
 class Order {
-	bool* validity;
+	bool validity = false;
 	static string* className;
 public:
 	Order();
-	bool* getValidity();
+	bool getValidity();
 	string* getClassName();
 	//void execute();
 };

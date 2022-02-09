@@ -1,12 +1,12 @@
 #include "Orders.hpp"
 
+string* Order::className = new string("Order");
 
 Order::Order() // Order Constructor
-{
-	*validity = false;
+{	
 }
 
-bool* Order::getValidity() // Accessor method
+bool Order::getValidity() // Accessor method
 {
 	return validity;
 }
@@ -21,6 +21,10 @@ string* Order::getClassName() // Accessor method
 // {
 	
 // }
+
+OrderList::OrderList()
+{
+}
 
 void OrderList::move(int from, int to)
 {
@@ -57,7 +61,15 @@ void OrderList::remove(int position)
 	temp = NULL;
 }
 
+Deploy::Deploy()
+{
+}
+
 void Deploy::execute(int numOfArmies, Territory* location)
+{
+}
+
+Advance::Advance()
 {
 }
 
@@ -65,7 +77,15 @@ void Advance::execute(int numOfArmies, Territory* from, Territory* to)
 {
 }
 
+Bomb::Bomb()
+{
+}
+
 void Bomb::execute(Territory* location)
+{
+}
+
+Blockade::Blockade()
 {
 }
 
@@ -73,7 +93,15 @@ void Blockade::execute(Territory* location)
 {
 }
 
+Airlift::Airlift()
+{
+}
+
 void Airlift::execute(int numOfArmies, Territory* from, Territory* to)
+{
+}
+
+Negotiate::Negotiate()
 {
 }
 
