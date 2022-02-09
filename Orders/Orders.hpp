@@ -2,9 +2,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../Map/Map.h""
+#include "../Map/Map.h"
 
 using namespace std;
+class Territory;
 // ------------------------------------------------------------
 // Declaration of OrdersList, Order and all subclasses of Order
 // ------------------------------------------------------------
@@ -32,7 +33,7 @@ public:
 class Deploy : public Order {
 public:
 	Deploy();
-	void execute(int numOfArmies, static Territory* location);
+	void execute(int numOfArmies, Territory* location);
 };
 
 class Advance : public Order {

@@ -17,10 +17,10 @@ string* Order::getClassName() // Accessor method
 }
 
 
-OrderList::OrderList()
-{
-
-}
+// OrderList::OrderList()
+// {
+	
+// }
 
 void OrderList::move(int from, int to)
 {
@@ -55,7 +55,6 @@ void OrderList::remove(int position)
 	list.erase(list.begin() + position);
 	delete temp;
 	temp = NULL;
-
 }
 
 void Deploy::execute(int numOfArmies, Territory* location)

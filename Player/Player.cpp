@@ -1,5 +1,10 @@
 #include "Player.h"
 
+Player::Player()
+{
+	orderList = new OrderList();
+}
+
 vector<Territory*>& Player::toAttack() {
 	vector<Territory*>* territoriesToAttack = new vector<Territory*>;
 

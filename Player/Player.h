@@ -7,21 +7,20 @@
 #include "../Orders/Orders.hpp"
 
 using namespace std;
-
+class OrderList;
 class Territory;
 
 class Player {
 public:
 	unordered_set<Territory*> territories;
 	Hand* hand;
-	OrderList* orderlist;
-
 	vector<Territory*>& toAttack();
 	vector<Territory*>& toDefend();
 
 	enum orderTypes{
 		DEPLOY, ADVANCE, BOMB, BLOCKADE, AIRLIFT, NEGOTIATE
 	} ;
-
-	void issueOrder(const char* orderType);
+	OrderList* orderList;
+	Player();
+	void issueOrder(orderTypes o);
 };
