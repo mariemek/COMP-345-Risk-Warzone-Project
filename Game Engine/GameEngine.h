@@ -10,55 +10,31 @@
 //When the run method is done, to do a transition, player needs to enter command prompt that will change the variable of the currentstate and point to the next one
 
 
+//create an enum variable to keep track of the current state in the switch statement
+
+
 enum currentStates{
     START,MAP_LOADED, MAP_VALIDATED,PLAYERS_ADDED,ASSIGN_REINFORCEMENT,ISSUE_ORDERS,EXECUTE_ORDERS,WIN
 };
 
 
-class State{
+//create a function pointer to other functions which acts like states
 
-private:
-    currentStates current;
+//void (*state)();
+
+class Game{
 
 public:
-    State(currentStates currentState);
-    State();
-    ~State();
 
-    void run();
-    void setCurrentState(currentStates);
-    currentStates getCurrentState();
-
+    void start();
+    void mapLoaded();
+    void mapValidated();
+    void playersAdded();
+    void assignReinforcement();
+    void issueOrders();
+    void executeOrders();
+    void win();
 };
 
-class Start: public State{
 
-};
 
-class Map_Loaded: public State{
-
-};
-
-class Map_Validated: public State{
-
-};
-
-class Player_Added :  public State{
-
-};
-
-class Assign_Reinforcement: public State{
-
-};
-
-class Issue_Orders: public State{
-
-};
-
-class Execute_Orders: public State{
-
-};
-
-class Win: public State{
-
-};
