@@ -20,9 +20,24 @@
 
 //void (*state)();
 
+#include<iostream>
+using namespace std;
+
 class GameEngine{
 
+private:
+    enum currentStates{
+    START,MAP_LOADED, MAP_VALIDATED,PLAYERS_ADDED,ASSIGN_REINFORCEMENT,ISSUE_ORDERS,EXECUTE_ORDERS,WIN
+};
+
 public:
+
+    GameEngine(const GameEngine &game1);
+    GameEngine& operator =(const GameEngine&);
+    ~GameEngine();
+
+     friend ostream & operator << (ostream &out, const GameEngine &g);
+    friend istream & operator >> (istream &in,  GameEngine &g);
 
     void start();
     void mapLoaded();

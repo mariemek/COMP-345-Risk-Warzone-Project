@@ -5,6 +5,7 @@ using namespace std;
 int main()
 {
 
-   GameEngine g;
-   g.start();
+   GameEngine *g;
+   g->start();
+   delete g;
 }

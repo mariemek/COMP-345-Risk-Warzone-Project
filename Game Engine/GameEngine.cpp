@@ -2,9 +2,28 @@
 #include "GameEngine.h"
 using namespace std;
 
-enum currentStates{
-    START,MAP_LOADED, MAP_VALIDATED,PLAYERS_ADDED,ASSIGN_REINFORCEMENT,ISSUE_ORDERS,EXECUTE_ORDERS,WIN
-};
+
+
+GameEngine::GameEngine(const GameEngine &game1){
+    
+}
+
+GameEngine& GameEngine::operator= (const GameEngine& game1){
+    return *this;
+}
+
+GameEngine::~GameEngine(){
+
+}
+
+ostream & operator << (ostream &out, const GameEngine &g){
+    return out;
+}
+
+istream & operator >> (istream &in, GameEngine &g){
+    return in;
+}
+
 
 void GameEngine::start(){
     currentStates current = START;
