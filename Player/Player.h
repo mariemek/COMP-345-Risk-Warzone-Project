@@ -22,5 +22,8 @@ public:
 	} ;
 	OrderList* orderList;
 	Player();
-	void issueOrder(orderTypes o);
+	void issueOrder(orderTypes, Territory&);
+	void issueOrder(orderTypes, int, Territory&);
+	void issueOrder(orderTypes, int, Territory&, Territory&);
+	void issueOrder(orderTypes, Player&);
 };

@@ -18,10 +18,6 @@ class Order {
 protected:
 	bool* validity;
 	string* className;
-	static string* EMPTYSTRING;
-	static Continent* EMPTYCONT;
-	static Territory* EMPTYTERR;
-	static Player* EMPTYPLAYER;
 	friend ostream& operator<<(ostream&, Order&);
 public:
 	Order();
@@ -51,7 +47,6 @@ class Deploy : public Order {
 	int numOfArmies;
 	Territory& location;
 public:
-	Deploy();
 	Deploy(int, Territory&);
 	virtual ~Deploy();
 	Deploy(const Deploy& d);
@@ -65,7 +60,6 @@ class Advance : public Order {
 	Territory& to;
 	Territory& from;
 public:
-	Advance();
 	Advance(int, Territory&, Territory&);
 	virtual ~Advance();
 	Advance(const Advance& a);
@@ -77,7 +71,6 @@ public:
 class Bomb : public Order {
 	Territory& location;
 public:
-	Bomb();
 	Bomb(Territory&);
 	virtual ~Bomb();
 	Bomb(const Bomb& b);

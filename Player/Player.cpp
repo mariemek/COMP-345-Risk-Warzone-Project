@@ -25,36 +25,69 @@ vector<Territory*>& Player::toDefend() {
 	return *(new vector<Territory*>(territories.begin(), territories.end()));
 }
 
-void Player::issueOrder(orderTypes o)
+void Player::issueOrder(orderTypes o, Territory& location)
+{
+	switch (o)
+	{
+	case BOMB: {
+		Bomb* bomb = new Bomb();
+		orderList->list.push_back(bomb);
+		}
+		break;
+	case BLOCKADE: {
+		Blockade* blockade = new Blockade();
+		orderList->list.push_back(blockade);
+		}
+		break;
+	default: cout << "Invalid Order issued";
+		break;
+	}
+}
+
+void Player::issueOrder(orderTypes o, int numOfArmies, Territory& location)
+{
+	switch (o)
+	{
+	case DEPLOY: {
+		Deploy* deploy = new Deploy(numOfArmies, location);
+		orderList->list.push_back(deploy);
+		}
+		break;
+	default: cout << "Invalid Order issued";
+		break;
+	}
+}
+
+void Player::issueOrder(orderTypes o, int numOfArmies, Territory& to, Territory& from)
 {
 
 	switch (o)
 	{
-	case DEPLOY:
-		Deploy* d = new Deploy();
-		orderList->list.push_back(d);
+	case ADVANCE: {
+		Advance* advance = new Advance();
+		orderList->list.push_back(advance);
+		}
 		break;
-	case ADVANCE:
-		Advance* a = new Advance();
-		orderList->list.push_back(a);
+	case AIRLIFT: {
+		Airlift* airlift = new Airlift();
+		orderList->list.push_back(airlift);
+		}
 		break;
-	case BOMB:
-		Bomb* b = new Bomb();
-		orderList->list.push_back(b);
-		break;
-	case BLOCKADE:
-		Blockade* b = new Blockade();
-		orderList->list.push_back(b);
-		break;
-	case AIRLIFT:
-		Airlift* a = new Airlift();
-		orderList->list.push_back(a);
-		break;
-	case NEGOTIATE:
-		Negotiate* n = new Negotiate();
-		orderList->list.push_back(n);
-		break;
-	default:
+	default: cout << "Invalid Order issued";
 		break;
 	};
+}
+
+void Player::issueOrder(orderTypes o, Player&)
+{
+	switch (o)
+	{
+	case NEGOTIATE: {
+		Negotiate* negotiate = new Negotiate();
+		orderList->list.push_back(negotiate);
+		}
+		break;
+	default: cout << "Invalid Order issued";
+		break;
+	}
 }
