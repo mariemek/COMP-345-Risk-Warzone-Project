@@ -2,8 +2,7 @@
 #include <unordered_set>
 #include <vector>
 #include "../Map/Map.h"
-#include "../Cards/Card.h"
-#include "../Cards/Hand.h"
+#include "../Cards/Cards.h"
 #include "../Orders/Orders.hpp"
 
 using namespace std;
