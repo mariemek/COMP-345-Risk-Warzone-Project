@@ -13,8 +13,8 @@ int main()
 	Player* p1 = new Player();
 	Player* p2 = new Player();
 	Continent* northAmerica = new Continent(*na);
-	Territory* canada = new Territory(*ca, *northAmerica);
-	Territory* unitedStates = new Territory(*us, *northAmerica);
+	Territory* canada = new Territory(*ca, northAmerica);
+	Territory* unitedStates = new Territory(*us, northAmerica);
 
 
 	OrderList* o = new OrderList();
