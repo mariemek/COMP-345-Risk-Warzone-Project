@@ -8,4 +8,5 @@ int main()
    GameEngine *g;
    g->start();
    delete g;
+   g = nullptr;
 }

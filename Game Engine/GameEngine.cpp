@@ -65,7 +65,7 @@ void GameEngine::start(){
             cout << "\nYou are in the map loaded phase\n"
                  << endl;
             // load the map
-            //  game->mapLoaded();
+            //  game->mapLoadedPhase();
             cout << "Map has been loaded" << endl;
             // ask for the options
             cout << choice;
@@ -75,7 +75,7 @@ void GameEngine::start(){
             {
             case 1:
                 // load another map
-                //    game->mapLoaded();
+                //    game->mapLoadedPhase();
                 cout << "Map has been loaded" << endl;
                 break;
             case 2:
@@ -90,7 +90,7 @@ void GameEngine::start(){
         case MAP_VALIDATED:
             cout << "\nYou are in the map validated phase\n"
                  << endl;
-            //    game->mapValidated();
+            //    game->mapValidatedPhase();
             cout << "The map has been validated" << endl;
             cout << choice;
             cout << "Enter an option: ";
@@ -110,7 +110,7 @@ void GameEngine::start(){
         case PLAYERS_ADDED:
             cout << "\nYou are in the player added phase\n"
                  << endl;
-            //    game->playersAdded();
+            //    game->playersAddedPhase();
             cout << choice;
             cout << "Enter your choice: ";
             cin >> option;
@@ -118,7 +118,7 @@ void GameEngine::start(){
             {
             case 3:
             //loop in same state
-                //        game->playersAdded();
+                //        game->playersAddedPhase();
                 break;
             case 4:
             //go to next state
@@ -132,7 +132,7 @@ void GameEngine::start(){
         case ASSIGN_REINFORCEMENT:
             cout << "\nYou are in the assignment reinforcement phase\n"
                  << endl;
-            // game->assignReinforcement();
+            // game->assignReinforcementPhase();
             cout << "\nThe countries have been assigned to the players\n";
             cout << choice;
             cin >> option;
@@ -149,7 +149,7 @@ void GameEngine::start(){
         case ISSUE_ORDERS:
             cout << "\nYou are in the issue order phase\n"
                  << endl;
-            // game->issueOrders();
+            // game->issueOrdersPhase();
             cout << "\nAn order has been issued\n";
             cout << choice;
             cout << "Enter a choice: ";
@@ -158,7 +158,7 @@ void GameEngine::start(){
             switch (option)
             {
             case 5:
-                // game->issueOrders();
+                // game->issueOrdersPhase();
                 break;
             case 6:
                 current = EXECUTE_ORDERS;
@@ -176,7 +176,7 @@ void GameEngine::start(){
             switch (option)
             {
             case 7:
-                // game->executeOrders();
+                // game->executeOrdersPhase();
                 cout << "\nAn order has been executed\n";
                 break;
             case 8:

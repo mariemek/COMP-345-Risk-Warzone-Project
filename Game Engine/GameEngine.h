@@ -40,13 +40,13 @@ public:
     friend istream & operator >> (istream &in,  GameEngine &g);
 
     void start();
-    void mapLoaded();
-    void mapValidated();
-    void playersAdded();
-    void assignReinforcement();
-    void issueOrders();
-    void executeOrders();
-    void win();
+    void mapLoadedPhase();
+    void mapValidatedPhase();
+    void playersAddedPhase();
+    void assignReinforcementPhase();
+    void issueOrdersPhase();
+    void executeOrdersPhase();
+    void winPhase();
 };
 
 
