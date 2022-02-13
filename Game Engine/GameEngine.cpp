@@ -26,11 +26,11 @@ istream & operator >> (istream &in, GameEngine &g){
     return in;
 }
 
-
+// Method to start the GameEngine 
 void GameEngine::start(){
-    currentStates current = START;
+    currentStates current = START;  // we start the current state in start automatically
    
-    bool gameRunning = true;
+    bool gameRunning = true; //boolean to end the loop when the game ends
     cout << "Welcome to Warzone. " << endl;
 
     //possible commands for the users
@@ -119,7 +119,7 @@ void GameEngine::start(){
             switch (option)
             {
             case 3:
-            //loop in same state
+            //loop in same state to add another player
                 //        game->playersAddedPhase();
                 break;
             case 4:
@@ -140,7 +140,7 @@ void GameEngine::start(){
             cin >> option;
             switch (option)
             {
-            case 5:
+            case 5: //go to the next state
                 current = ISSUE_ORDERS;
                 break;
             default:
@@ -159,10 +159,10 @@ void GameEngine::start(){
 
             switch (option)
             {
-            case 5:
+            case 5:  //loop in the same state, issue another order
                 // game->issueOrdersPhase();
                 break;
-            case 6:
+            case 6:  //move to the next state
                 current = EXECUTE_ORDERS;
                 break;
             default:
@@ -177,15 +177,15 @@ void GameEngine::start(){
             cin >> option;
             switch (option)
             {
-            case 7:
+            case 7:  //loop in the same state
                 // game->executeOrdersPhase();
                 cout << "\nAn order has been executed\n";
                 break;
-            case 8:
+            case 8:  //move back to previous state
                 cout << "Ending execution orders";
                 current = ASSIGN_REINFORCEMENT;
                 break;
-            case 9:
+            case 9:  //move to next state
                 current = WIN;
                 break;
             default:
@@ -201,11 +201,11 @@ void GameEngine::start(){
             cin >> option;
             switch (option)
             {
-            case 10:
+            case 10:  //move back to start state
                 cout << "Restarting a new game...";
                 current = START;
                 break;
-            case 11:
+            case 11: //move out of the loop and end the game
                 cout << "End of the game...";
                 gameRunning = false;
                 break;
