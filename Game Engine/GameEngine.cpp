@@ -2,7 +2,9 @@
 #include "GameEngine.h"
 using namespace std;
 
+GameEngine::GameEngine() {
 
+}
 
 GameEngine::GameEngine(const GameEngine &game1){
     

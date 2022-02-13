@@ -12,13 +12,10 @@
 
 //create an enum variable to keep track of the current state in the switch statement
 
-
-
-
-
 //create a function pointer to other functions which acts like states
 
 //void (*state)();
+#pragma once
 
 #include<iostream>
 using namespace std;
@@ -31,15 +28,16 @@ private:
 };
 
 public:
-
+    GameEngine();
     GameEngine(const GameEngine &game1);
     GameEngine& operator =(const GameEngine&);
     ~GameEngine();
 
-     friend ostream & operator << (ostream &out, const GameEngine &g);
+    friend ostream & operator << (ostream &out, const GameEngine &g);
     friend istream & operator >> (istream &in,  GameEngine &g);
 
     void start();
+    /*
     void mapLoadedPhase();
     void mapValidatedPhase();
     void playersAddedPhase();
@@ -47,6 +45,7 @@ public:
     void issueOrdersPhase();
     void executeOrdersPhase();
     void winPhase();
+    */
 };
 
 
