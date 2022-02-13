@@ -66,6 +66,7 @@ void OrderList::move(int from, int to)
 				list.at(i) = list.at(i + 1);
 			}
 			list.at(to) = temp;
+			temp = NULL;
 		}
 		else if (from > to)
 		{
@@ -123,7 +124,7 @@ OrderList& OrderList::operator=(const OrderList& o)
 	return *this;
 }
 
-Deploy::Deploy(int numOfArmies, Territory& location) : Order(), numOfArmies(numOfArmies), location(location)
+Deploy::Deploy(Player& issuingPlayer, int numOfArmies, Territory& location) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), location(location)
 {
 	cout << "Making a Deploy" << endl;
 	delete (className);
@@ -131,9 +132,15 @@ Deploy::Deploy(int numOfArmies, Territory& location) : Order(), numOfArmies(numO
 	Deploy::className = new string("Deploy");
 }
 
-void Deploy::execute(int numOfArmies, Territory& location)
+void Deploy::validate()
 {
+	cout << "Validating Deploy Order..." << endl;
+}
 
+void Deploy::execute(Player& issuingPlayer, int numOfArmies, Territory& location)
+{
+	Deploy::validate();
+	cout << "Executing Deploy..." << endl;
 }
 
 Deploy::~Deploy()
@@ -145,7 +152,7 @@ Deploy::~Deploy()
 	validity = NULL;
 }
 
-Deploy::Deploy(const Deploy& d) : Order(d), numOfArmies(d.numOfArmies), location(d.location)
+Deploy::Deploy(const Deploy& d) : Order(d), issuingPlayer(d.issuingPlayer), numOfArmies(d.numOfArmies), location(d.location)
 {
 	cout << "Copying a Deploy" << endl;
 	delete (className);
@@ -159,12 +166,13 @@ Deploy& Deploy::operator=(const Deploy& d)
 	delete (className);
 	className = NULL;
 	this->className = new string(*(d.className));
+	this->issuingPlayer = d.issuingPlayer;
 	this->numOfArmies = d.numOfArmies;
 	this->location = d.location;
 	return *this;
 }
 
-Advance::Advance(int numOfArmies, Territory& to, Territory& from) : Order(), numOfArmies(numOfArmies), to(to), from(from)
+Advance::Advance(Player& issuingPlayer, int numOfArmies, Territory& to, Territory& from) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), to(to), from(from)
 {
 	cout << "Making an Advance" << endl;
 	delete (className);
@@ -172,8 +180,15 @@ Advance::Advance(int numOfArmies, Territory& to, Territory& from) : Order(), num
 	Advance::className = new string("Advance");
 }
 
-void Advance::execute(int numOfArmies, Territory& from, Territory& to)
+void Advance::validate()
 {
+	cout << "Validating Advance Order..." << endl;
+}
+
+void Advance::execute(Player& issuingPlayer, int numOfArmies, Territory& from, Territory& to)
+{
+	Advance::validate();
+	cout << "Executing Advance..." << endl;
 }
 
 Advance::~Advance()
@@ -181,7 +196,7 @@ Advance::~Advance()
 	cout << "Destroying an Advance" << endl;
 }
 
-Advance::Advance(const Advance& a) : Order(a), numOfArmies(a.numOfArmies), to(a.to), from(a.from)
+Advance::Advance(const Advance& a) : Order(a), issuingPlayer(a.issuingPlayer), numOfArmies(a.numOfArmies), to(a.to), from(a.from)
 {
 	cout << "Copying an Advance" << endl;
 	delete (className);
@@ -195,13 +210,14 @@ Advance& Advance::operator=(const Advance& a)
 	delete (className);
 	className = NULL;
 	this->className = new string(*(a.className));
+	this->issuingPlayer = a.issuingPlayer;
 	this->numOfArmies = a.numOfArmies;
 	this->to = a.to;
 	this->from = a.from;
 	return *this;
 }
 
-Bomb::Bomb(Territory& location) : Order(), location(location)
+Bomb::Bomb(Player& issuingPlayer, Territory& location) : Order(), issuingPlayer(issuingPlayer), location(location)
 {
 	cout << "Making a Bomb" << endl;
 	delete (className);
@@ -214,7 +230,7 @@ Bomb::~Bomb()
 	cout << "Destroying a Bomb" << endl;
 }
 
-Bomb::Bomb(const Bomb& b) : Order(b), location(b.location)
+Bomb::Bomb(const Bomb& b) : Order(b), issuingPlayer(b.issuingPlayer), location(b.location)
 {
 	cout << "Copying an Bomb" << endl;
 	delete (className);
@@ -228,15 +244,23 @@ Bomb& Bomb::operator=(const Bomb b)
 	delete (className);
 	className = NULL;
 	this->className = new string(*(b.className));
+	this->issuingPlayer = b.issuingPlayer;
 	this->location = b.location;
 	return *this;
 }
 
-void Bomb::execute(Territory& location)
+void Bomb::validate()
 {
+	cout << "Validating Deploy Order..." << endl;
 }
 
-Blockade::Blockade(Territory& location) : Order(), location(location)
+void Bomb::execute(Player& issuingPlayer, Territory& location)
+{
+	Bomb::validate();
+	cout << "Executing Bomb..." << endl;
+}
+
+Blockade::Blockade(Player& issuingPlayer, Territory& location) : Order(), issuingPlayer(issuingPlayer), location(location)
 {
 	cout << "Making a Blockade" << endl;
 	delete (className);
@@ -249,11 +273,18 @@ Blockade::~Blockade()
 	cout << "Destroying a Blockade" << endl;
 }
 
-void Blockade::execute(Territory* location)
+void Blockade::validate()
 {
+	cout << "Validating Blockade Order..." << endl;
 }
 
-Blockade::Blockade(const Blockade& b) : Order(b), location(b.location)
+void Blockade::execute(Player& issuingPlayer, Territory& location)
+{
+	Blockade::validate();
+	cout << "Executing Blockade..." << endl;
+}
+
+Blockade::Blockade(const Blockade& b) : Order(b), issuingPlayer(b.issuingPlayer), location(b.location)
 {
 	cout << "Copying a Blockade" << endl;
 	delete (className);
@@ -267,15 +298,12 @@ Blockade& Blockade::operator=(const Blockade& b)
 	delete (className);
 	className = NULL;
 	this->className = new string(*(b.className));
+	this->issuingPlayer = b.issuingPlayer;
 	this->location = b.location;
 	return *this;
 }
 
-void Blockade::execute(Territory& location)
-{
-}
-
-Airlift::Airlift(int numOfArmies, Territory& from, Territory& to) : Order(), numOfArmies(numOfArmies), to(to), from(from)
+Airlift::Airlift(Player& issuingPlayer, int numOfArmies, Territory& from, Territory& to) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), to(to), from(from)
 {
 	cout << "Making an Airlift" << endl;
 	delete (className);
@@ -283,8 +311,15 @@ Airlift::Airlift(int numOfArmies, Territory& from, Territory& to) : Order(), num
 	Airlift::className = new string("Airlift");
 }
 
-void Airlift::execute(int numOfArmies, Territory& from, Territory& to)
+void Airlift::validate()
 {
+	cout << "Validating Airlift Order..." << endl;
+}
+
+void Airlift::execute(Player& issuingPlayer, int numOfArmies, Territory& from, Territory& to)
+{
+	Airlift::validate();
+	cout << "Executing Airlift..." << endl;
 }
 
 Airlift::~Airlift()
@@ -292,7 +327,7 @@ Airlift::~Airlift()
 	cout << "Destroying an Airlift" << endl;
 }
 
-Airlift::Airlift(const Airlift& a) : Order(a), numOfArmies(a.numOfArmies), to(a.to), from(a.from)
+Airlift::Airlift(const Airlift& a) : Order(a), issuingPlayer(a.issuingPlayer), numOfArmies(a.numOfArmies), to(a.to), from(a.from)
 {
 	cout << "Copying an Airlift" << endl;
 	delete (className);
@@ -306,13 +341,14 @@ Airlift& Airlift::operator=(const Airlift& a)
 	delete (className);
 	className = NULL;
 	this->className = new string(*(a.className));
+	this->issuingPlayer = a.issuingPlayer;
 	this->numOfArmies = a.numOfArmies;
 	this->to = a.to;
 	this->from = a.from;
 	return *this;
 }
 
-Negotiate::Negotiate(Player& targetPlayer) : Order(), targetPlayer(targetPlayer)
+Negotiate::Negotiate(Player& issuingPlayer, Player& targetPlayer) : Order(), issuingPlayer(issuingPlayer), targetPlayer(targetPlayer)
 {
 	cout << "Making a Negotiate" << endl;
 	delete (className);
@@ -325,7 +361,7 @@ Negotiate::~Negotiate()
 	cout << "Destroying a Negotiate" << endl;
 }
 
-Negotiate::Negotiate(const Negotiate& n) : Order(n), targetPlayer(n.targetPlayer)
+Negotiate::Negotiate(const Negotiate& n) : Order(n), issuingPlayer(n.issuingPlayer), targetPlayer(n.targetPlayer)
 {
 	cout << "Copying a Negotiate" << endl;
 	delete (className);
@@ -339,10 +375,18 @@ Negotiate& Negotiate::operator=(const Negotiate& n)
 	delete (className);
 	className = NULL;
 	this->className = new string(*(n.className));
+	this->issuingPlayer = n.issuingPlayer;
 	this->targetPlayer = n.targetPlayer;
 	return *this;
 }
 
-void Negotiate::execute(Player& targetPlayer)
+void Negotiate::validate()
 {
+	cout << "Validating Negotiate Order..." << endl;
+}
+
+void Negotiate::execute(Player& issuingPlayer, Player& targetPlayer)
+{
+	Negotiate::validate();
+	cout << "Executing Negotiate..." << endl;
 }

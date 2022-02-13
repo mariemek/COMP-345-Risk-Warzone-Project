@@ -44,75 +44,81 @@ public:
 };
 
 class Deploy : public Order {
+	Player& issuingPlayer;
 	int numOfArmies;
 	Territory& location;
 public:
-	Deploy(int, Territory&);
+	Deploy(Player&, int, Territory&);
 	virtual ~Deploy();
 	Deploy(const Deploy& d);
 	Deploy& operator=(const Deploy& d);
 	void validate();
-	void execute(int numOfArmies, Territory& location);
+	void execute(Player&, int numOfArmies, Territory& location);
 };
 
 class Advance : public Order {
+	Player& issuingPlayer;
 	int numOfArmies;
 	Territory& to;
 	Territory& from;
 public:
-	Advance(int, Territory&, Territory&);
+	Advance(Player&, int, Territory&, Territory&);
 	virtual ~Advance();
 	Advance(const Advance& a);
 	Advance& operator=(const Advance& a);
 	void validate();
-	void execute(int numOfArmies, Territory& to, Territory& from);
+	void execute(Player&, int numOfArmies, Territory& to, Territory& from);
 };
 
 class Bomb : public Order {
+	Player& issuingPlayer;
 	Territory& location;
 public:
-	Bomb(Territory&);
+	Bomb(Player&, Territory&);
 	virtual ~Bomb();
 	Bomb(const Bomb& b);
 	Bomb& operator=(const Bomb b);
 	void validate();
-	void execute(Territory& location);
+	void execute(Player&, Territory& location);
 };
 
 class Blockade : public Order {
+	Player& issuingPlayer;
 	Territory& location;
 public:
 	Blockade();
-	Blockade(Territory&);
+	Blockade(Player&, Territory&);
 	virtual ~Blockade();
 	Blockade(const Blockade& b);
 	Blockade& operator=(const Blockade& b);
 	void validate();
-	void execute(Territory& location);
+	void execute(Player&, Territory& location);
 };
 
 class Airlift : public Order {
+	Player& issuingPlayer;
 	int numOfArmies;
 	Territory& to;
 	Territory& from;
 public:
 	Airlift();
-	Airlift(int, Territory&, Territory&);
+	Airlift(Player&, int, Territory&, Territory&);
 	virtual ~Airlift();
 	Airlift(const Airlift& a);
 	Airlift& operator=(const Airlift& a);
 	void validate();
-	void execute(int numOfArmies, Territory& from, Territory& to);
+	void execute(Player&, int numOfArmies, Territory& from, Territory& to);
 };
 
 class Negotiate : public Order {
+	Player& issuingPlayer;
 	Player& targetPlayer;
 public:
 	Negotiate();
-	Negotiate(Player&);
+	Negotiate(Player&, Player&);
 	virtual ~Negotiate();
 	Negotiate(const Negotiate& n);
 	Negotiate& operator=(const Negotiate& n);
 	void validate();
-	void execute(Player& targetPlayer);
+	void execute(Player&, Player& targetPlayer);
 };

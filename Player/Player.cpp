@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	orderList = new OrderList();
+	OrderList* orderList = new OrderList;
 }
 
 vector<Territory*>& Player::toAttack() {
@@ -25,68 +25,68 @@ vector<Territory*>& Player::toDefend() {
 	return *(new vector<Territory*>(territories.begin(), territories.end()));
 }
 
-void Player::issueOrder(orderTypes o, Territory& location)
+void Player::issueOrder(orderTypes o, Player& issuingPlayer, Territory& location)
 {
 	switch (o)
 	{
 	case BOMB: {
-		Bomb* bomb = new Bomb();
+		Bomb* bomb = new Bomb(issuingPlayer, location);
 		orderList->list.push_back(bomb);
-		}
-		break;
+	}
+			 break;
 	case BLOCKADE: {
-		Blockade* blockade = new Blockade();
+		Blockade* blockade = new Blockade(issuingPlayer, location);
 		orderList->list.push_back(blockade);
-		}
-		break;
+	}
+				 break;
 	default: cout << "Invalid Order issued";
 		break;
 	}
 }
 
-void Player::issueOrder(orderTypes o, int numOfArmies, Territory& location)
+void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Territory& location)
 {
 	switch (o)
 	{
 	case DEPLOY: {
-		Deploy* deploy = new Deploy(numOfArmies, location);
+		Deploy* deploy = new Deploy(issuingPlayer, numOfArmies, location);
 		orderList->list.push_back(deploy);
-		}
-		break;
+	}
+			   break;
 	default: cout << "Invalid Order issued";
 		break;
 	}
 }
 
-void Player::issueOrder(orderTypes o, int numOfArmies, Territory& to, Territory& from)
+void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Territory& to, Territory& from)
 {
 
 	switch (o)
 	{
 	case ADVANCE: {
-		Advance* advance = new Advance();
+		Advance* advance = new Advance(issuingPlayer, numOfArmies, to, from);
 		orderList->list.push_back(advance);
-		}
-		break;
+	}
+				break;
 	case AIRLIFT: {
-		Airlift* airlift = new Airlift();
+		Airlift* airlift = new Airlift(issuingPlayer, numOfArmies, to, from);
 		orderList->list.push_back(airlift);
-		}
-		break;
+	}
+				break;
 	default: cout << "Invalid Order issued";
 		break;
 	};
 }
 
-void Player::issueOrder(orderTypes o, Player&)
+void Player::issueOrder(orderTypes o, Player& issuingPlayer, Player& targetPlayer)
 {
 	switch (o)
 	{
 	case NEGOTIATE: {
-		Negotiate* negotiate = new Negotiate();
+		Negotiate* negotiate = new Negotiate(issuingPlayer, targetPlayer);
 		orderList->list.push_back(negotiate);
-		}
-		break;
+	}
+				  break;
 	default: cout << "Invalid Order issued";
 		break;
 	}
