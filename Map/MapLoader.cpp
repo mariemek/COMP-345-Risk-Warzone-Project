@@ -4,7 +4,7 @@
 using namespace std;
 #include "MapLoader.h"
 
-Map& MapLoader::createMap(string& filename) {
+Map& MapLoader::createMap(string filename) {
 	const string continentsflag = "[continents]";
 	Map* gamemap = new Map();
 
