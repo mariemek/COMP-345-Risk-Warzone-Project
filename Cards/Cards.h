@@ -3,11 +3,14 @@
 #include <vector>
 #include <iostream>
 
+#include "../Player/Player.h"
+
 #define DECK_SIZE 50
 #define HAND_SIZE 5
 
 class Hand;
 class Deck;
+class Player;
 
 class Card {
     public:
@@ -27,7 +30,7 @@ class Card {
         CardType getCardType() const;
         std::string cardTypeToString() const;
 
-        void play(std::vector<Card*> &, Deck*, Hand*);
+        void play(Player*, Deck*);
 
         Card& operator=(const Card&);
         friend std::ostream& operator<<(std::ostream&, const Card&);
@@ -42,8 +45,6 @@ class Hand {
         Hand();
         Hand(const Hand&);
         ~Hand();
-
-        int getHandSize();
        
         void addCard(Card*);      
 

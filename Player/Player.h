@@ -9,6 +9,7 @@ using namespace std;
 
 class Territory;
 class OrderList;
+class Hand;
 
 class Player {
 public:

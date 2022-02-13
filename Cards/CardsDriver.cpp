@@ -1,42 +1,52 @@
 #include <iostream>
 #include <vector>
 #include "Cards.h"
+#include "../Player/Player.h"
 
 using namespace std;
 
-void print(Card* c);
 int main() {
 
     Deck* deck = new Deck();    
-    Hand* hand = new Hand();
-    vector<Card*> ol;
+    Player* player = new Player();
+
+    // Output status
     cout << "- Deck and Hand created." << endl;
     cout << *deck;
-    cout << *hand;
-    cout << "Order List Size: " << ol.size() << endl;
+    cout << "Player Hand Size: " << player->hand->cards.size() << endl;
+    cout << "Order List Size: " << player->orderList->list.size() << endl;
 
-    cout << endl << "- Filling the Hand." << endl;
+    // Fill players hand with cards
+    cout << endl << "- Filling the Hand..." << endl;
     for (int i = 0; i < HAND_SIZE; i++) {
         Card* c = deck->draw();
         cout << "Card Drawn: " << c->cardTypeToString() << endl;
-        hand->addCard(c);
+        player->hand->addCard(c);
     }
 
+    // Output status
     cout << endl << "- Hand is filled." << endl;
     cout << *deck;
-    cout << *hand;
+    cout << "Player Hand Size: " << player->hand->cards.size() << endl;
+    cout << "Order List Size: " << player->orderList->list.size() << endl;
 
-    cout << endl << "- Playing each Card" << endl;
-    vector<Card*>::iterator iter = hand->cards.begin();
-    while (iter != hand->cards.end()) {
-        (*iter)->play(ol, deck, hand);
+    // Play each card
+    // Should remove it from the hand and add back to the deck
+    cout << endl << "- Playing each Card..." << endl;
+    while (!player->hand->cards.empty()) {
+        Card* c = player->hand->cards.back();
+        c->play(player, deck);
     }
 
+    // Output status
     cout << endl << "- All Cards in Hand have been played." << endl;
     cout << *deck;
-    cout << *hand;
-    cout << "Order List Size: " << ol.size() << endl;
+    cout << "Player Hand Size: " << player->hand->cards.size() << endl;
+    cout << "Order List Size: " << player->orderList->list.size() << endl;
 
+    // Free memory
     delete deck;
-    delete hand;
+    delete player;
+
+    cin.get();
 }

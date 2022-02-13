@@ -2,6 +2,7 @@
 
 Player::Player()
 {
+	hand = new Hand();
 	orderList = new OrderList();
 }
 

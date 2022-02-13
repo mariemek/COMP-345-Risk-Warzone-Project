@@ -1,20 +1,28 @@
-#include "Cards.h"
 #include <algorithm>
 
+#include "Cards.h"
+#include "../Player/Player.h"
+#include "../Orders/Orders.hpp"
+
+// Deck Constructor
+// Decks are initialized with DECK_SIZE amount of Cards
 Deck::Deck() { 
     for (int i = 0; i < DECK_SIZE; i++) {
-        // Fill the deck with an equal amount of each card
+
+        // Alternate through the types
         Card* c = new Card(static_cast<Card::CardType>(i % Card::CardType::LAST));
         addCard(c);
     }
 
 }
 
+// Deck Copy Constructor
 Deck::Deck(const Deck& d) {
-    for(Card* c : d.cards) 
-        addCard(c); 
+    cards = d.cards;
 }
 
+// Deck Destructor
+// Deck is a vector of pointers, delete each pointer to free memory, then clear the vector
 Deck::~Deck() {
     for(Card* c : cards)
         delete c;
@@ -22,11 +30,8 @@ Deck::~Deck() {
     cards.clear();
 }
 
-/**
- * @brief Chooses a random Card from the Deck and moves it to the Hand
- * 
- * @param h - The Hand object in which the Card is moved to
- */
+// Draw a Card from the Deck
+// Picks a random index, removes that Card from the Deck and returns it.
 Card* Deck::draw() {
     int randIndex = rand() % cards.size();
     Card* c = cards.at(randIndex);
@@ -34,83 +39,87 @@ Card* Deck::draw() {
     return c;
 }
 
-/**
- * @brief Places a Card object at the end of the Deck
- * 
- * @param c - The Card object that is added to the end of the Deck
- */
+// Insert a Card at the end of the Deck
 void Deck::addCard(Card* c) {
     cards.push_back(c);
 }
 
+// Assignment Operator
+// Move the Deck cards to the recipient Deck
 Deck& Deck:: operator=(const Deck& d) {
     cards = d.cards;
     return *this;
 }
 
+// Stream Insertion Operator
+// Currently just printing the Deck size
 std::ostream& operator<<(std::ostream& out, const Deck& deck) {
     out << "Deck Size: " << deck.cards.size() << std::endl;
     return out;
 }
 
 
+// Hand Constructor
 Hand::Hand() {}
 
+// Hand Copy Constructor
 Hand::Hand(const Hand& h) {
-    for(Card* c : h.cards) 
-        this->cards.push_back(c);   
-    //! verify if 'new' needed 
+    cards = h.cards;
 }
 
+// Hand Destructor
+// Free each Cards memory then clear the Hand's vector
 Hand::~Hand() {
-    for(Card* c : this->cards) 
+    for(Card* c : cards) 
         delete c;
     
-    this->cards.clear();
+    cards.clear();
 }
 
-/**
- * @brief Places a Card object at the end of the Hand
- * 
- * @param c 
- */
+// Places a Card at the end of the Hand
 void Hand::addCard(Card* c) {
     cards.push_back(c);
 }
 
-Hand& Hand::operator=(const Hand& t) {
-    this->cards = t.cards;
+// Assignment Operator
+// Move the Hand cards to the recipient Hand
+Hand& Hand::operator=(const Hand& h) {
+    cards = h.cards;
     return *this;
 }
-        
+
+// Stream Insertion Operator
+// Currently just printing the Hand size
 std::ostream& operator<<(std::ostream& out, const Hand& hand) {
     out << "Hand Size: " << hand.cards.size() << std::endl;
     return out;
 }
 
 
+// Card Constructor
+// Cards require a CardType to be created
 Card::Card(CardType c) {
     type = new CardType(c);
 }
 
+// Card Copy Constructor
 Card::Card(const Card& c) {
-    type = new CardType(c.getCardType());
+    *type = c.getCardType();
 }
 
+// Card Destructor
+// Free the Card
 Card::~Card() {
     delete type;
     type = NULL;
 };
 
-/**
- * @brief CardType Value Getter
- * 
- * @return const Card::CardType 
- */
+// CardType Value Getter
 Card::CardType Card::getCardType() const {
     return *type;
 }
 
+// Converts a Cards type to String for printing purposes.
 std::string Card::cardTypeToString() const {
     switch(this->getCardType()) { 
         case CardType::Airlift:         return "Airlift";
@@ -122,50 +131,60 @@ std::string Card::cardTypeToString() const {
     }
 }
 
-/**
- * @brief Creates an Order from the Card
- * 
- */
-void Card::play(std::vector<Card*> &ol, Deck* deck, Hand* hand) {
+// Playing a Card
+// Create an Order depending on the Cards type
+// Remove the Card from the players Hand and add it back to the Deck.
+void Card::play(Player* player, Deck* deck) {
 
     // will add the card type to the order list later
     switch(this->getCardType()) { 
         case CardType::Airlift:
+            player->orderList->list.push_back(new Order());
             std::cout << "Airlift order created" << std::endl;
             break;
+
         case CardType::Blockade:
+            player->orderList->list.push_back(new Order());
             std::cout << "Blockade order created" << std::endl;
             break;
+
         case CardType::Bomb:
+            player->orderList->list.push_back(new Order());
             std::cout << "Bomb order created" << std::endl;
             break;
+
         case CardType::Diplomacy:
+            player->orderList->list.push_back(new Order());
             std::cout << "Diplomacy order created" << std::endl;
             break;
+
         case CardType::Reinforcement:
+            player->orderList->list.push_back(new Order());
             std::cout << "Reinforcement order created" << std::endl;
             break;
+
         default:
             std::cout << "Card Type Error" << std::endl;
             break;
     }
     
     // Remove the card from the Hand and add it to the Deck
-    auto index = std::find(hand->cards.begin(), hand->cards.end(), this);
-    if (index != hand->cards.end()) {
-        hand->cards.erase(index);
+    auto index = std::find(player->hand->cards.begin(), player->hand->cards.end(), this);
+    if (index != player->hand->cards.end()) {
+        player->hand->cards.erase(index);
         deck->addCard(this);
-        ol.push_back(this);
     }
 }
 
+// Assignment Operator
+// Only concerned about the Card type
 Card& Card::operator=(const Card& t){
     this->type = t.type;
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &out, const Card& card) {
-
-    
+// Stream Insertion Operator
+// Print the Cards type as a string
+std::ostream &operator<<(std::ostream &out, const Card& card) {    
     return out << card.cardTypeToString() << std::endl;
 }
