@@ -1,5 +1,5 @@
-#ifndef MAP_H
-#define MAP_H
+#pragma once
+
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
@@ -17,6 +17,7 @@ public:
 	vector<Territory*> territories;
 
 	Continent(string&);
+	~Continent();
 };
 
 class Territory { //declaration of the territory class
@@ -46,7 +47,6 @@ public:
 	vector<Continent*> continents;
 
 	bool validate();
-
+	~Map();
 
 };
-#endif
