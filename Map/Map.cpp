@@ -96,4 +96,6 @@ Territory::Territory(string& name, Continent* continent) {
 
 Territory::~Territory() {
     //owner = NULL;
+    delete (continent);
+    continent = NULL;
 }

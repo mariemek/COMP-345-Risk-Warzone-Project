@@ -2,7 +2,14 @@
 
 Player::Player()
 {
-	OrderList* orderList = new OrderList;
+	orderList = new OrderList();
+}
+
+Player::~Player()
+{
+	delete (orderList);
+	orderList = NULL;
+	cout << "Destroying a Player" << endl;
 }
 
 vector<Territory*>& Player::toAttack() {

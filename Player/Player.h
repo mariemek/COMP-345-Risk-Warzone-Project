@@ -24,6 +24,7 @@ public:
 		DEPLOY = 0, ADVANCE, BOMB, BLOCKADE, AIRLIFT, NEGOTIATE
 	};
 	Player();
+	~Player();
 	void issueOrder(orderTypes, Player&, Territory&);
 	void issueOrder(orderTypes, Player&, int, Territory&);
 	void issueOrder(orderTypes, Player&, int, Territory&, Territory&);
