@@ -8,7 +8,7 @@ using namespace std;
 int main() {
 
     Deck* deck = new Deck();    
-    Player* player = new Player();
+    Player* player = new Player("Jonah");
 
     // Output status
     cout << "- Deck and Hand created." << endl;
