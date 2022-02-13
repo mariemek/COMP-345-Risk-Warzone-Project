@@ -89,6 +89,6 @@ int main()
 	na = NULL;
 	ca = NULL;
 	northAmerica = NULL;
-
+	cin.get();
 	return 0;
 } 
