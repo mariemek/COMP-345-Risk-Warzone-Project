@@ -85,7 +85,7 @@ void MapLoader::processBorders(string& line, unordered_map<int, Territory*> coun
 
 		cout << *bordercountry << " ";
 	}
-
+	delete& split;
 	cout << endl;
 }
 
@@ -95,7 +95,7 @@ Continent& MapLoader::createContinent(string& line) {
 	string name = split[0];
 
 	Continent* continent = new Continent(name);
-
+	delete& split;
 	return *continent;
 }
 
@@ -112,6 +112,8 @@ Territory& MapLoader::createTerritory(string& line, unordered_map<int, Continent
 	Territory* territory = new Territory(name, continent);
 
 	continent->territories.push_back(territory);
+
+	delete &split;
 
 	return *territory;
 }

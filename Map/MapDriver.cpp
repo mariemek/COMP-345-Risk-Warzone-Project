@@ -25,6 +25,8 @@ int main()
         }
     }
 
+    for (Map* map : validmaps) delete map;
+
     cin.get();
     
 } 
