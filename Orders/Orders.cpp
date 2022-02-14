@@ -5,13 +5,13 @@
 	class Continent;
 	class Territory;
 
-Order::Order()										// Order Method Implementations
+Order::Order()		// Constructor								// Order Method Implementations
 {	
 	cout << "Making an Order\n";
 	Order::className = new string("Order");
 	Order::validity = new bool(false);
 }
-Order::~Order()
+Order::~Order() // Destructor
 {
 	cout << "Destroying an Order" << endl;
 	delete (className);
@@ -20,26 +20,26 @@ Order::~Order()
 	validity = NULL;
 }
 
-Order::Order(const Order& o) 
+Order::Order(const Order& o) // Copy Constructor
 {
 	cout << "Copying an Order" << endl;
 	this->validity = new bool(*(o.validity));
 	this->className = new string(*(o.className));
 }
 
-Order& Order::operator =(const Order& o) 
+Order& Order::operator =(const Order& o) // Assignment Operator Overload
 {
 	this->validity = new bool(*(o.validity));
 	this->className = new string(*(o.className));
 	return *this;
 }
 
-bool& Order::getValidity()							
+bool& Order::getValidity()		// Accessor method				
 {
 	return *validity;
 }
 
-string& Order::getClassName()						
+string& Order::getClassName()		//accessor method				
 {
 	return *className;
 }
@@ -49,12 +49,12 @@ ostream& operator<<(ostream& strm, Order& o)			// Free stream insertion implemen
 	return strm << "Order Type: " << *o.className;
 }
 
-OrderList::OrderList()							// OrderList Method Implementations
+OrderList::OrderList()	// Constructor				// OrderList Method Implementations
 {
 	cout << "Making an OrderList\n";
 }
 
-
+// The move function moves the pointer of an Order subclass from one position in the orderList to another
 void OrderList::move(int from, int to)
 {
 	if (from < list.size() && from >= 0 && to < list.size() && to >= 0) {
@@ -83,7 +83,8 @@ void OrderList::move(int from, int to)
 	}
 }
 
-void OrderList::remove(int position)
+void OrderList::remove(int position)	// The remove function removes the Order object from the orderList 
+										// as well as deletes the data stored in the heap to avoid memory leaks
 {
 	if (position < list.size() && position >= 0) {
 		Order* temp = list.at(position);
@@ -97,7 +98,7 @@ void OrderList::remove(int position)
 	}
 }
 
-OrderList::~OrderList()
+OrderList::~OrderList() // Destructor
 {
 	cout << "Destroying an OrderList" << endl;
 	if (!list.empty())
@@ -112,38 +113,38 @@ OrderList::~OrderList()
 	}
 }
 
-OrderList::OrderList(const OrderList& o)
+OrderList::OrderList(const OrderList& o) // Copy Constructor
 {
 	cout << "Copying an OrderList" << endl;
 	this->list = o.list;
 }
 
 OrderList& OrderList::operator=(const OrderList& o)
-{
+{							// Assignment Operator Overload
 	this->list = o.list;
 	return *this;
 }
-
-Deploy::Deploy(Player& issuingPlayer, int numOfArmies, Territory& location) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), location(location)
-{
+			
+Deploy::Deploy(Player* issuingPlayer, int numOfArmies, Territory* location) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), location(location)
+{										// Constructor
 	cout << "Making a Deploy" << endl;
 	delete (className);
 	className = NULL;
 	Deploy::className = new string("Deploy");
 }
 
-void Deploy::validate()
+void Deploy::validate() // Will validate the circumstances of the object before executing
 {
 	cout << "Validating Deploy Order..." << endl;
 }
-
-void Deploy::execute(Player& issuingPlayer, int numOfArmies, Territory& location)
+// the execute function will check validation before implementing the functionality of the order
+void Deploy::execute(Player* issuingPlayer, int numOfArmies, Territory* location)
 {
 	Deploy::validate();
 	cout << "Executing Deploy..." << endl;
 }
 
-Deploy::~Deploy()
+Deploy::~Deploy() // Destructor
 {
 	cout << "Destroying a Deploy" << endl;
 	delete (className);
@@ -153,14 +154,14 @@ Deploy::~Deploy()
 }
 
 Deploy::Deploy(const Deploy& d) : Order(d), issuingPlayer(d.issuingPlayer), numOfArmies(d.numOfArmies), location(d.location)
-{
+{											// Copy Constructor
 	cout << "Copying a Deploy" << endl;
 	delete (className);
 	className = NULL;
 	this->className = new string(*(d.className));
 }
 
-Deploy& Deploy::operator=(const Deploy& d)
+Deploy& Deploy::operator=(const Deploy& d) // Assignment Operator Overload
 {
 	Order::operator =(d);
 	delete (className);
@@ -172,39 +173,39 @@ Deploy& Deploy::operator=(const Deploy& d)
 	return *this;
 }
 
-Advance::Advance(Player& issuingPlayer, int numOfArmies, Territory& to, Territory& from) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), to(to), from(from)
-{
+Advance::Advance(Player* issuingPlayer, int numOfArmies, Territory* to, Territory* from) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), to(to), from(from)
+{											// Constructor
 	cout << "Making an Advance" << endl;
 	delete (className);
 	className = NULL;
 	Advance::className = new string("Advance");
 }
 
-void Advance::validate()
+void Advance::validate() // Will validate the circumstances of the object before executing
 {
 	cout << "Validating Advance Order..." << endl;
 }
-
-void Advance::execute(Player& issuingPlayer, int numOfArmies, Territory& from, Territory& to)
+// the execute function will check validation before implementing the functionality of the order
+void Advance::execute(Player* issuingPlayer, int numOfArmies, Territory* to, Territory* from)
 {
 	Advance::validate();
 	cout << "Executing Advance..." << endl;
 }
 
-Advance::~Advance()
+Advance::~Advance() // Destructor
 {
 	cout << "Destroying an Advance" << endl;
 }
 
 Advance::Advance(const Advance& a) : Order(a), issuingPlayer(a.issuingPlayer), numOfArmies(a.numOfArmies), to(a.to), from(a.from)
-{
+{											// Copy Constructor
 	cout << "Copying an Advance" << endl;
 	delete (className);
 	className = NULL;
 	this->className = new string(*(a.className));
 }
 
-Advance& Advance::operator=(const Advance& a)
+Advance& Advance::operator=(const Advance& a) // Assignment Operator Overload
 {
 	Order::operator =(a);
 	delete (className);
@@ -217,28 +218,28 @@ Advance& Advance::operator=(const Advance& a)
 	return *this;
 }
 
-Bomb::Bomb(Player& issuingPlayer, Territory& location) : Order(), issuingPlayer(issuingPlayer), location(location)
-{
+Bomb::Bomb(Player* issuingPlayer, Territory* location) : Order(), issuingPlayer(issuingPlayer), location(location)
+{										// Constructor
 	cout << "Making a Bomb" << endl;
 	delete (className);
 	className = NULL;
 	Bomb::className = new string("Bomb");
 }
 
-Bomb::~Bomb()
+Bomb::~Bomb() // Destructor
 {
 	cout << "Destroying a Bomb" << endl;
 }
 
 Bomb::Bomb(const Bomb& b) : Order(b), issuingPlayer(b.issuingPlayer), location(b.location)
-{
+{										// Copy Constructor
 	cout << "Copying an Bomb" << endl;
 	delete (className);
 	className = NULL;
 	this->className = new string(*(b.className));
 }
 
-Bomb& Bomb::operator=(const Bomb b)
+Bomb& Bomb::operator=(const Bomb b) // Assignment Operator Overload
 {
 	Order::operator =(b);
 	delete (className);
@@ -249,50 +250,50 @@ Bomb& Bomb::operator=(const Bomb b)
 	return *this;
 }
 
-void Bomb::validate()
+void Bomb::validate() // Will validate the circumstances of the object before executing
 {
-	cout << "Validating Deploy Order..." << endl;
+	cout << "Validating Bomb Order..." << endl;
 }
-
-void Bomb::execute(Player& issuingPlayer, Territory& location)
+// the execute function will check validation before implementing the functionality of the order
+void Bomb::execute(Player* issuingPlayer, Territory* location)
 {
 	Bomb::validate();
 	cout << "Executing Bomb..." << endl;
 }
 
-Blockade::Blockade(Player& issuingPlayer, Territory& location) : Order(), issuingPlayer(issuingPlayer), location(location)
-{
+Blockade::Blockade(Player* issuingPlayer, Territory* location) : Order(), issuingPlayer(issuingPlayer), location(location)
+{											// Constructor
 	cout << "Making a Blockade" << endl;
 	delete (className);
 	className = NULL;
 	Blockade::className = new string("Blockade");
 }
 
-Blockade::~Blockade()
+Blockade::~Blockade() // Destructor
 {
 	cout << "Destroying a Blockade" << endl;
 }
 
-void Blockade::validate()
+void Blockade::validate() // Will validate the circumstances of the object before executing
 {
 	cout << "Validating Blockade Order..." << endl;
 }
-
-void Blockade::execute(Player& issuingPlayer, Territory& location)
+// the execute function will check validation before implementing the functionality of the order
+void Blockade::execute(Player* issuingPlayer, Territory* location)
 {
 	Blockade::validate();
 	cout << "Executing Blockade..." << endl;
 }
 
 Blockade::Blockade(const Blockade& b) : Order(b), issuingPlayer(b.issuingPlayer), location(b.location)
-{
+{											// Copy Constructor
 	cout << "Copying a Blockade" << endl;
 	delete (className);
 	className = NULL;
 	this->className = new string(*(b.className));
 }
 
-Blockade& Blockade::operator=(const Blockade& b)
+Blockade& Blockade::operator=(const Blockade& b) // Assignment Operator Overload
 {
 	Order::operator =(b);
 	delete (className);
@@ -303,39 +304,39 @@ Blockade& Blockade::operator=(const Blockade& b)
 	return *this;
 }
 
-Airlift::Airlift(Player& issuingPlayer, int numOfArmies, Territory& from, Territory& to) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), to(to), from(from)
-{
+Airlift::Airlift(Player* issuingPlayer, int numOfArmies, Territory* to, Territory* from) : Order(), issuingPlayer(issuingPlayer), numOfArmies(numOfArmies), to(to), from(from)
+{											// Constructor
 	cout << "Making an Airlift" << endl;
 	delete (className);
 	className = NULL;
 	Airlift::className = new string("Airlift");
 }
 
-void Airlift::validate()
+void Airlift::validate() // Will validate the circumstances of the object before executing
 {
 	cout << "Validating Airlift Order..." << endl;
 }
-
-void Airlift::execute(Player& issuingPlayer, int numOfArmies, Territory& from, Territory& to)
+// the execute function will check validation before implementing the functionality of the order
+void Airlift::execute(Player* issuingPlayer, int numOfArmies, Territory* to, Territory* from)
 {
 	Airlift::validate();
 	cout << "Executing Airlift..." << endl;
 }
 
-Airlift::~Airlift()
+Airlift::~Airlift() // Destructor
 {
 	cout << "Destroying an Airlift" << endl;
 }
 
 Airlift::Airlift(const Airlift& a) : Order(a), issuingPlayer(a.issuingPlayer), numOfArmies(a.numOfArmies), to(a.to), from(a.from)
-{
+{											// Copy Constructor
 	cout << "Copying an Airlift" << endl;
 	delete (className);
 	className = NULL;
 	this->className = new string(*(a.className));
 }
 
-Airlift& Airlift::operator=(const Airlift& a)
+Airlift& Airlift::operator=(const Airlift& a) // Assignment Operator Overload
 {
 	Order::operator =(a);
 	delete (className);
@@ -348,28 +349,28 @@ Airlift& Airlift::operator=(const Airlift& a)
 	return *this;
 }
 
-Negotiate::Negotiate(Player& issuingPlayer, Player& targetPlayer) : Order(), issuingPlayer(issuingPlayer), targetPlayer(targetPlayer)
-{
+Negotiate::Negotiate(Player* issuingPlayer, Player* targetPlayer) : Order(), issuingPlayer(issuingPlayer), targetPlayer(targetPlayer)
+{											// Constructor
 	cout << "Making a Negotiate" << endl;
 	delete (className);
 	className = NULL;
 	Negotiate::className = new string("Negotiate");
 }
 
-Negotiate::~Negotiate()
+Negotiate::~Negotiate() // Destructor
 {
 	cout << "Destroying a Negotiate" << endl;
 }
 
 Negotiate::Negotiate(const Negotiate& n) : Order(n), issuingPlayer(n.issuingPlayer), targetPlayer(n.targetPlayer)
-{
+{											// Copy Constructor
 	cout << "Copying a Negotiate" << endl;
 	delete (className);
 	className = NULL;
 	this->className = new string(*(n.className));
 }
 
-Negotiate& Negotiate::operator=(const Negotiate& n)
+Negotiate& Negotiate::operator=(const Negotiate& n) // Assignment Operator Overload
 {
 	Order::operator =(n);
 	delete (className);
@@ -380,12 +381,12 @@ Negotiate& Negotiate::operator=(const Negotiate& n)
 	return *this;
 }
 
-void Negotiate::validate()
+void Negotiate::validate() // Will validate the circumstances of the object before executing
 {
 	cout << "Validating Negotiate Order..." << endl;
 }
-
-void Negotiate::execute(Player& issuingPlayer, Player& targetPlayer)
+// the execute function will check validation before implementing the functionality of the order
+void Negotiate::execute(Player* issuingPlayer, Player* targetPlayer)
 {
 	Negotiate::validate();
 	cout << "Executing Negotiate..." << endl;

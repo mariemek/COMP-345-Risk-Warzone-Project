@@ -27,6 +27,10 @@ public:
 	Player(string);
 	Player(const Player*);
 	~Player();
+	void issueOrder(orderTypes, Player*, Territory*);
+	void issueOrder(orderTypes, Player*, int, Territory*);
+	void issueOrder(orderTypes, Player*, int, Territory*, Territory*);
+	void issueOrder(orderTypes, Player*, Player*);
 
 	void issueOrder(orderTypes, Territory&);
 	void issueOrder(orderTypes, int, Territory&);
