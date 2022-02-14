@@ -50,5 +50,8 @@ int main() {
 
 	cout << endl << "Current order list: " << *(player.orderList);
 
+	
+
 	cin.get();
+	delete& map;
 }
