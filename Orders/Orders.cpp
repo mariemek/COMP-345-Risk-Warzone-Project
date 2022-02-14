@@ -10,8 +10,8 @@
 Order::Order()		// Constructor								// Order Method Implementations
 {
 	cout << "Making an Order\n";
-	Order::className = new string("Order");
-	Order::validity = new bool(false);
+	this->className = new string("Order");
+	this->validity = new bool(false);
 }
 Order::~Order() // Destructor
 {
@@ -116,16 +116,7 @@ void OrderList::remove(int position)	// The remove function removes the Order ob
 OrderList::~OrderList() // Destructor
 {
 	cout << "Destroying an OrderList" << endl;
-	if (!list.empty())
-	{
-		for (int i = 0; i < list.size(); i++)
-		{
-			Order* temp = list.at(0);
-			delete (temp);
-			temp = NULL;
-			list.erase(list.begin());
-		}
-	}
+	for (auto order : this->list) delete order;
 }
 
 OrderList::OrderList(const OrderList& o) // Copy Constructor
