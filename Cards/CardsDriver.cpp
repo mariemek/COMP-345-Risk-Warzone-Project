@@ -6,15 +6,17 @@
 using namespace std;
 
 int main() {
+    // Initialize the random seed using the current epoch time
+    srand(time(0));
 
     Deck* deck = new Deck();    
     Player* player = new Player("Jonah");
 
     // Output status
-    cout << "- Deck and Hand created." << endl;
+    cout << "- Deck and Player created." << endl;
     cout << *deck;
     cout << "Player Hand Size: " << player->hand->cards.size() << endl;
-    cout << "Order List Size: " << player->orderList->list.size() << endl;
+    cout << "Player Order List Size: " << player->orderList->list.size() << endl;
 
     // Fill players hand with cards
     cout << endl << "- Filling the Hand..." << endl;
@@ -28,7 +30,7 @@ int main() {
     cout << endl << "- Hand is filled." << endl;
     cout << *deck;
     cout << "Player Hand Size: " << player->hand->cards.size() << endl;
-    cout << "Order List Size: " << player->orderList->list.size() << endl;
+    cout << "Player Order List Size: " << player->orderList->list.size() << endl;
 
     // Play each card
     // Should remove it from the hand and add back to the deck
@@ -42,7 +44,7 @@ int main() {
     cout << endl << "- All Cards in Hand have been played." << endl;
     cout << *deck;
     cout << "Player Hand Size: " << player->hand->cards.size() << endl;
-    cout << "Order List Size: " << player->orderList->list.size() << endl;
+    cout << "Player Order List Size: " << player->orderList->list.size() << endl;
 
     // Free memory
     delete deck;
