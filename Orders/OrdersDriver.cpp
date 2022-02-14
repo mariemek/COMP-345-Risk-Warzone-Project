@@ -11,8 +11,8 @@ int main()
 	string* na = new string("North America");
 	string* ca = new string("Canada");
 	string* us = new string("United States");
-	Player* p1 = new Player();
-	Player* p2 = new Player();
+	Player* p1 = new Player("Michael");
+	Player* p2 = new Player("William");
 	Continent* northAmerica = new Continent(*na);
 	Territory* canada = new Territory(*ca, northAmerica);
 	Territory* unitedStates = new Territory(*us, northAmerica);
@@ -89,6 +89,6 @@ int main()
 	na = NULL;
 	ca = NULL;
 	northAmerica = NULL;
-
+	cin.get();
 	return 0;
 } 

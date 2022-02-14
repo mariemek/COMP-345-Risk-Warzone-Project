@@ -24,5 +24,7 @@ int main()
             cout << "Rejected file " << filename << ". It is an invalid file.";
         }
     }
+
+    cin.get();
     
 } 

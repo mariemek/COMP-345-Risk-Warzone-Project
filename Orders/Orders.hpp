@@ -7,6 +7,7 @@
 #include "../Map/Map.h"
 
 using namespace std;
+class Player;
 class Territory;
 class Continent;
 

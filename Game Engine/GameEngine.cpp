@@ -2,7 +2,9 @@
 #include "GameEngine.h"
 using namespace std;
 
+GameEngine::GameEngine() {
 
+}
 
 GameEngine::GameEngine(const GameEngine &game1){
     
@@ -24,11 +26,11 @@ istream & operator >> (istream &in, GameEngine &g){
     return in;
 }
 
-
+// Method to start the GameEngine 
 void GameEngine::start(){
-    currentStates current = START;
+    currentStates current = START;  // we start the current state in start automatically
    
-    bool gameRunning = true;
+    bool gameRunning = true; //boolean to end the loop when the game ends
     cout << "Welcome to Warzone. " << endl;
 
     //possible commands for the users
@@ -65,7 +67,7 @@ void GameEngine::start(){
             cout << "\nYou are in the map loaded phase\n"
                  << endl;
             // load the map
-            //  game->mapLoaded();
+            //  game->mapLoadedPhase();
             cout << "Map has been loaded" << endl;
             // ask for the options
             cout << choice;
@@ -75,7 +77,7 @@ void GameEngine::start(){
             {
             case 1:
                 // load another map
-                //    game->mapLoaded();
+                //    game->mapLoadedPhase();
                 cout << "Map has been loaded" << endl;
                 break;
             case 2:
@@ -90,7 +92,7 @@ void GameEngine::start(){
         case MAP_VALIDATED:
             cout << "\nYou are in the map validated phase\n"
                  << endl;
-            //    game->mapValidated();
+            //    game->mapValidatedPhase();
             cout << "The map has been validated" << endl;
             cout << choice;
             cout << "Enter an option: ";
@@ -110,15 +112,15 @@ void GameEngine::start(){
         case PLAYERS_ADDED:
             cout << "\nYou are in the player added phase\n"
                  << endl;
-            //    game->playersAdded();
+            //    game->playersAddedPhase();
             cout << choice;
             cout << "Enter your choice: ";
             cin >> option;
             switch (option)
             {
             case 3:
-            //loop in same state
-                //        game->playersAdded();
+            //loop in same state to add another player
+                //        game->playersAddedPhase();
                 break;
             case 4:
             //go to next state
@@ -132,13 +134,13 @@ void GameEngine::start(){
         case ASSIGN_REINFORCEMENT:
             cout << "\nYou are in the assignment reinforcement phase\n"
                  << endl;
-            // game->assignReinforcement();
+            // game->assignReinforcementPhase();
             cout << "\nThe countries have been assigned to the players\n";
             cout << choice;
             cin >> option;
             switch (option)
             {
-            case 5:
+            case 5: //go to the next state
                 current = ISSUE_ORDERS;
                 break;
             default:
@@ -149,7 +151,7 @@ void GameEngine::start(){
         case ISSUE_ORDERS:
             cout << "\nYou are in the issue order phase\n"
                  << endl;
-            // game->issueOrders();
+            // game->issueOrdersPhase();
             cout << "\nAn order has been issued\n";
             cout << choice;
             cout << "Enter a choice: ";
@@ -157,10 +159,10 @@ void GameEngine::start(){
 
             switch (option)
             {
-            case 5:
-                // game->issueOrders();
+            case 5:  //loop in the same state, issue another order
+                // game->issueOrdersPhase();
                 break;
-            case 6:
+            case 6:  //move to the next state
                 current = EXECUTE_ORDERS;
                 break;
             default:
@@ -175,15 +177,15 @@ void GameEngine::start(){
             cin >> option;
             switch (option)
             {
-            case 7:
-                // game->executeOrders();
+            case 7:  //loop in the same state
+                // game->executeOrdersPhase();
                 cout << "\nAn order has been executed\n";
                 break;
-            case 8:
+            case 8:  //move back to previous state
                 cout << "Ending execution orders";
                 current = ASSIGN_REINFORCEMENT;
                 break;
-            case 9:
+            case 9:  //move to next state
                 current = WIN;
                 break;
             default:
@@ -199,11 +201,11 @@ void GameEngine::start(){
             cin >> option;
             switch (option)
             {
-            case 10:
+            case 10:  //move back to start state
                 cout << "Restarting a new game...";
                 current = START;
                 break;
-            case 11:
+            case 11: //move out of the loop and end the game
                 cout << "End of the game...";
                 gameRunning = false;
                 break;

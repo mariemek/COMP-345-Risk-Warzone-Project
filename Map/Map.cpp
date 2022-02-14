@@ -40,6 +40,8 @@ bool Map::continentsAreConnectedGraphs() {
     return true;
 }
 
+
+// Checks if the set contains all of the territories in the vectors
 bool Map::setContainsTerritories(unordered_set <string> nameset, vector<Territory*>& territories) {
     for (const Territory* territory : territories) {
         if (nameset.find(territory->name) == nameset.end()) {
@@ -49,6 +51,9 @@ bool Map::setContainsTerritories(unordered_set <string> nameset, vector<Territor
     return true;
 }
 
+/*
+* For every continent, every one of its territories should be pointing to it.
+*/
 bool Map::countriesBelongOneContinent() {
     for (Continent* continent : continents) {
         for (const Territory* territory : continent->territories) {
@@ -82,9 +87,28 @@ void Map::performDFS(const Territory* territory, unordered_set <string>& nameset
         performDFS(adjacentTerritory, nameset);
     }
 }
+
+// The map's destructor is the one that handles destroying the territories & continents
+Map::~Map() {
+    for (Territory* territory : territories)
+        delete territory;
+
+    territories.clear();
+
+    for (Continent* continent : continents)
+        delete continent;
+
+    continents.clear();
+}
 // Continent implementation
 Continent::Continent(string& name) {
     this->name = name;
+}
+
+// No need to do anything in here, the destructor of vector is called by default and frees the pointers but not what they're pointing to which will be handled
+// by the map
+Continent::~Continent() {
+    cout << "Destroyed Continent: " << this->name << endl;
 }
 
 // Territory implementation
@@ -94,8 +118,10 @@ Territory::Territory(string& name, Continent* continent) {
     this->nbOfArmy = 0;
 }
 
+/*
+* Only set pointers to null, the Map object will handle deleting continents and the Game Engine will handle deleting the players
+*/
 Territory::~Territory() {
-    //owner = NULL;
-    delete (continent);
     continent = NULL;
+    owner = NULL;
 }
