@@ -25,15 +25,15 @@ bool Map::validate() {
 bool Map::mapIsConnectedGraph() {
     // If the map is a connected graph, we should be able to start from any node, perform Depth-First Search,
     // and end up with a set that contains every node in the map.
-    unordered_set <string> nameset;
+    for (Territory* territory : territories) {
+        unordered_set <string> nameset;
 
-    const Territory* firstTerritory = territories[0];
-    performDFS(firstTerritory, nameset);
+        performDFS(territory, nameset);
 
-    if (!setContainsTerritories(nameset, territories)) return false;
+        if (!setContainsTerritories(nameset, territories)) return false;
+    }
 
     return true;
-
 }
 /*
 * Similar approach to mapIsConnectedGraph, but adding an end condition for the DFS is that if the current Territory's continent is not the same
@@ -41,14 +41,15 @@ bool Map::mapIsConnectedGraph() {
 */
 bool Map::continentsAreConnectedGraphs() {
     for (Continent* continent : continents) {
-        unordered_set <string> nameset;
         vector<Territory*>& continentTerritories = continent->territories;
 
-        const Territory* firstTerritory = continentTerritories[0];
+        for (Territory* territory : continent->territories) {
+            unordered_set <string> nameset;
 
-        performContinentDFS(firstTerritory, nameset);
+            performContinentDFS(territory, nameset);
 
-        if(!setContainsTerritories(nameset, continentTerritories)) return false;
+            if (!setContainsTerritories(nameset, continentTerritories)) return false;
+        }
     }
     return true;
 }
