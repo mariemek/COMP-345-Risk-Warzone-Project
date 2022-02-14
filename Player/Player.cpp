@@ -48,17 +48,17 @@ vector<Territory*>& Player::toDefend() {
 	return *(new vector<Territory*>(territories.begin(), territories.end()));
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, Territory& location)
+void Player::issueOrder(orderTypes o, Territory& location)
 {
 	switch (o)
 	{
 	case BOMB: {
-		Bomb* bomb = new Bomb(issuingPlayer, location);
+		Bomb* bomb = new Bomb(*this, location);
 		orderList->list.push_back(bomb);
 	}
 			 break;
 	case BLOCKADE: {
-		Blockade* blockade = new Blockade(issuingPlayer, location);
+		Blockade* blockade = new Blockade(*this, location);
 		orderList->list.push_back(blockade);
 	}
 				 break;
@@ -67,12 +67,12 @@ void Player::issueOrder(orderTypes o, Player& issuingPlayer, Territory& location
 	}
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Territory& location)
+void Player::issueOrder(orderTypes o, int numOfArmies, Territory& location)
 {
 	switch (o)
 	{
 	case DEPLOY: {
-		Deploy* deploy = new Deploy(issuingPlayer, numOfArmies, location);
+		Deploy* deploy = new Deploy(*this, numOfArmies, location);
 		orderList->list.push_back(deploy);
 	}
 			   break;
@@ -81,18 +81,18 @@ void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Te
 	}
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Territory& to, Territory& from)
+void Player::issueOrder(orderTypes o, int numOfArmies, Territory& to, Territory& from)
 {
 
 	switch (o)
 	{
 	case ADVANCE: {
-		Advance* advance = new Advance(issuingPlayer, numOfArmies, to, from);
+		Advance* advance = new Advance(*this, numOfArmies, to, from);
 		orderList->list.push_back(advance);
 	}
 				break;
 	case AIRLIFT: {
-		Airlift* airlift = new Airlift(issuingPlayer, numOfArmies, to, from);
+		Airlift* airlift = new Airlift(*this, numOfArmies, to, from);
 		orderList->list.push_back(airlift);
 	}
 				break;
@@ -101,12 +101,12 @@ void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Te
 	};
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, Player& targetPlayer)
+void Player::issueOrder(orderTypes o, Player& targetPlayer)
 {
 	switch (o)
 	{
 	case NEGOTIATE: {
-		Negotiate* negotiate = new Negotiate(issuingPlayer, targetPlayer);
+		Negotiate* negotiate = new Negotiate(*this, targetPlayer);
 		orderList->list.push_back(negotiate);
 	}
 				  break;
