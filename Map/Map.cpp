@@ -2,6 +2,13 @@
 #include "Map.h"
 using namespace std;
 // Map implementation
+Map::Map() {}
+
+Map::Map(Map& map) {
+
+    
+}
+
 bool Map::validate() {
     if (!mapIsConnectedGraph()) return false;
     if (!continentsAreConnectedGraphs()) return false;

@@ -7,12 +7,20 @@ Player::Player(string n)
 	orderList = new OrderList();
 }
 
-Player::Player(const Player* player)
+Player::Player(const Player& player)
 {
-	territories = player->territories;
+	territories = player.territories;
 
-	hand = new Hand(*(player->hand));
-	orderList = new OrderList(*(player->orderList));
+	hand = new Hand(*(player.hand));
+	orderList = new OrderList(*(player.orderList));
+}
+
+Player& Player::operator=(const Player& player){
+	territories = player.territories;
+
+	hand = new Hand(*(player.hand));
+	orderList = new OrderList(*(player.orderList));
+	return *this;
 }
 
 Player::~Player()

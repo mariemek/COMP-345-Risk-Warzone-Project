@@ -10,6 +10,7 @@ using namespace std;
 class Territory;
 class OrderList;
 class Hand;
+class Order;
 
 class Player {
 public:
@@ -25,8 +26,10 @@ public:
 		DEPLOY = 0, ADVANCE, BOMB, BLOCKADE, AIRLIFT, NEGOTIATE
 	};
 	Player(string);
-	Player(const Player*);
+	Player(const Player&);
 	~Player();
+
+	Player& operator=(const Player& o);
 
 	void issueOrder(orderTypes, Territory*);
 	void issueOrder(orderTypes, int, Territory*);
