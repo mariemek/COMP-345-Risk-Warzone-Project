@@ -19,7 +19,8 @@ public:
 	friend std::ostream& operator<<(std::ostream&, const Continent&);
 
 	Continent(string&);
-	Continent(Continent&);
+	Continent(const Continent&);
+	Continent& operator=(const Continent&);
 	~Continent();
 };
 
@@ -33,8 +34,9 @@ public:
 
 	friend std::ostream& operator<<(std::ostream&, const Territory&);
 
-	Territory(string&, Continent*);
-	Territory(Territory&);
+	Territory(const string&, Continent*);
+	Territory(const Territory&);
+	Territory& operator=(const Territory&);
 	~Territory();//destructor
 
 };
@@ -53,9 +55,11 @@ public:
 	vector<Territory*> territories;
 	vector<Continent*> continents;
 
-	Map();
-	Map(Map&);
 	bool validate();
+
+	Map();
+	Map(const Map&);
+	Map& operator=(const Map&);
 	~Map();
 
 };

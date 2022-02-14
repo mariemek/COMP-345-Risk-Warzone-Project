@@ -4,9 +4,15 @@ using namespace std;
 // Map implementation
 Map::Map() {}
 
-Map::Map(Map& map) {
+Map::Map(const Map& map) {
+    territories = map.territories;
+    continents = map.continents;
+}
 
-    
+Map& Map::operator=(const Map& map) {
+    territories = map.territories;
+    continents = map.continents;
+    return *this;
 }
 
 bool Map::validate() {
@@ -116,6 +122,12 @@ Continent::Continent(string& name) {
     this->name = name;
 }
 
+// Shallow copy because otherwise it would require copying the entire map? Seems quite useless considering the scope of this project.
+Continent::Continent(const Continent& continent) {
+    this->name = name;
+    this->territories = territories;
+}
+
 // No need to do anything in here, the destructor of vector is called by default and frees the pointers but not what they're pointing to which will be handled
 // by the map
 Continent::~Continent() {
@@ -128,10 +140,25 @@ std::ostream& operator<<(std::ostream& out, const Continent& continent) {
 }
 
 // Territory implementation
-Territory::Territory(string& name, Continent* continent) {
+Territory::Territory(const string& name, Continent* continent) {
     this->name = name;
     this->continent = continent;
     this->nbOfArmy = 0;
+}
+
+// Shallow copy because otherwise it would require copying the entire map? Seems quite useless considering the scope of this project.
+Territory::Territory(const Territory& territory) {
+    this->name = territory.name;
+    this->continent = territory.continent;
+    this->nbOfArmy = territory.nbOfArmy;
+}
+
+Territory& Territory::operator=(const Territory& territory) {
+    this->name = territory.name;
+    this->continent = territory.continent;
+    this->nbOfArmy = territory.nbOfArmy;
+
+    return *this;
 }
 
 /*
