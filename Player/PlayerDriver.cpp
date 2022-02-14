@@ -53,5 +53,7 @@ int main() {
 	
 
 	cin.get();
+	delete& toattack;
+	delete& todefend;
 	delete& map;
 }
