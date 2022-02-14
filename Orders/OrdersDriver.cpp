@@ -44,7 +44,7 @@ int main()
 	o->list.push_back(deploy2);
 	deploy2 = NULL;
 	cout << "--execute() and validate()--" << endl;
-	deploy->execute(p1, 1, canada);
+	deploy->execute();
 
 	cout << o->list.size() << endl;
 	cout << *o->list.at(0) << endl;

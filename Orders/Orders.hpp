@@ -7,6 +7,7 @@
 #include "../Map/Map.h"
 
 using namespace std;
+
 class Player;
 class Territory;
 class Continent;
@@ -56,7 +57,7 @@ public:
 	Deploy(const Deploy& d);
 	Deploy& operator=(const Deploy& d);
 	void validate();
-	void execute(Player*, int numOfArmies, Territory* location);
+	void execute();
 };
 
 class Advance : public Order {
@@ -70,7 +71,7 @@ public:
 	Advance(const Advance& a);
 	Advance& operator=(const Advance& a);
 	void validate();
-	void execute(Player*, int numOfArmies, Territory* to, Territory* from);
+	void execute();
 };
 
 class Bomb : public Order {
@@ -82,7 +83,7 @@ public:
 	Bomb(const Bomb& b);
 	Bomb& operator=(const Bomb b);
 	void validate();
-	void execute(Player*, Territory* location);
+	void execute();
 };
 
 class Blockade : public Order {
@@ -95,7 +96,7 @@ public:
 	Blockade(const Blockade& b);
 	Blockade& operator=(const Blockade& b);
 	void validate();
-	void execute(Player*, Territory* location);
+	void execute();
 };
 
 class Airlift : public Order {
@@ -110,7 +111,7 @@ public:
 	Airlift(const Airlift& a);
 	Airlift& operator=(const Airlift& a);
 	void validate();
-	void execute(Player*, int numOfArmies, Territory* from, Territory* to);
+	void execute();
 };
 
 class Negotiate : public Order {
@@ -123,5 +124,5 @@ public:
 	Negotiate(const Negotiate& n);
 	Negotiate& operator=(const Negotiate& n);
 	void validate();
-	void execute(Player*, Player* targetPlayer);
+	void execute();
 };

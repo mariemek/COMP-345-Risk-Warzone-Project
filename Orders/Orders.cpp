@@ -5,8 +5,10 @@
 	class Continent;
 	class Territory;
 
+	using std::cout;
+
 Order::Order()		// Constructor								// Order Method Implementations
-{	
+{
 	cout << "Making an Order\n";
 	Order::className = new string("Order");
 	Order::validity = new bool(false);
@@ -151,7 +153,7 @@ void Deploy::validate() // Will validate the circumstances of the object before 
 	cout << "Validating Deploy Order..." << endl;
 }
 // the execute function will check validation before implementing the functionality of the order
-void Deploy::execute(Player* issuingPlayer, int numOfArmies, Territory* location)
+void Deploy::execute()
 {
 	Deploy::validate();
 	cout << "Executing Deploy..." << endl;
@@ -199,7 +201,7 @@ void Advance::validate() // Will validate the circumstances of the object before
 	cout << "Validating Advance Order..." << endl;
 }
 // the execute function will check validation before implementing the functionality of the order
-void Advance::execute(Player* issuingPlayer, int numOfArmies, Territory* to, Territory* from)
+void Advance::execute()
 {
 	Advance::validate();
 	cout << "Executing Advance..." << endl;
@@ -268,7 +270,7 @@ void Bomb::validate() // Will validate the circumstances of the object before ex
 	cout << "Validating Bomb Order..." << endl;
 }
 // the execute function will check validation before implementing the functionality of the order
-void Bomb::execute(Player* issuingPlayer, Territory* location)
+void Bomb::execute()
 {
 	Bomb::validate();
 	cout << "Executing Bomb..." << endl;
@@ -292,7 +294,7 @@ void Blockade::validate() // Will validate the circumstances of the object befor
 	cout << "Validating Blockade Order..." << endl;
 }
 // the execute function will check validation before implementing the functionality of the order
-void Blockade::execute(Player* issuingPlayer, Territory* location)
+void Blockade::execute()
 {
 	Blockade::validate();
 	cout << "Executing Blockade..." << endl;
@@ -330,7 +332,7 @@ void Airlift::validate() // Will validate the circumstances of the object before
 	cout << "Validating Airlift Order..." << endl;
 }
 // the execute function will check validation before implementing the functionality of the order
-void Airlift::execute(Player* issuingPlayer, int numOfArmies, Territory* to, Territory* from)
+void Airlift::execute()
 {
 	Airlift::validate();
 	cout << "Executing Airlift..." << endl;
@@ -399,7 +401,7 @@ void Negotiate::validate() // Will validate the circumstances of the object befo
 	cout << "Validating Negotiate Order..." << endl;
 }
 // the execute function will check validation before implementing the functionality of the order
-void Negotiate::execute(Player* issuingPlayer, Player* targetPlayer)
+void Negotiate::execute()
 {
 	Negotiate::validate();
 	cout << "Executing Negotiate..." << endl;
