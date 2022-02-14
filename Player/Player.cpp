@@ -23,6 +23,10 @@ Player& Player::operator=(const Player& player){
 	return *this;
 }
 
+std::ostream& operator<<(std::ostream& out, const Player& player) {
+	return out << player.name;
+}
+
 Player::~Player()
 {
 	delete orderList;

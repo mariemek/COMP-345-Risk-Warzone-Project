@@ -29,7 +29,9 @@ public:
 	Player(const Player&);
 	~Player();
 
-	Player& operator=(const Player& o);
+	Player& operator=(const Player&);
+
+	friend std::ostream& operator<<(std::ostream&, const Player&);
 
 	void issueOrder(orderTypes, Territory*);
 	void issueOrder(orderTypes, int, Territory*);
