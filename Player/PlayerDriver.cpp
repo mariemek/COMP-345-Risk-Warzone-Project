@@ -34,18 +34,18 @@ int main() {
 	for (Territory* territory : todefend)
 		cout << "\t" << territory->name << endl;
 
-	Territory& attack = *toattack[0];
+	Territory* attack = toattack[0];
 
 
 	cout << endl << "Current order list: " << *(player.orderList);
-	cout << endl << "Issuing order to bomb " << attack << endl;
+	cout << endl << "Issuing order to bomb " << *attack << endl;
 	player.issueOrder(player.BOMB, attack);
 
-	Territory& origin = *todefend[0];
-	Territory& destination = *todefend[1];
+	Territory* origin = todefend[0];
+	Territory* destination = todefend[1];
 
 	cout << endl << "Current order list: " << *(player.orderList);
-	cout << endl << "Issuing order to airlift " << attack << endl;
+	cout << endl << "Issuing order to airlift " << *attack << endl;
 	player.issueOrder(player.AIRLIFT, 10, origin, destination);
 
 	cout << endl << "Current order list: " << *(player.orderList);

@@ -89,6 +89,7 @@ void Map::performDFS(const Territory* territory, unordered_set <string>& nameset
 }
 
 std::ostream& operator<<(std::ostream& out, const Map& continent) {
+    return out;
 }
 
 // The map's destructor is the one that handles destroying the territories & continents
