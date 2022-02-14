@@ -28,7 +28,7 @@ Map& MapLoader::createMap(string filename) {
 		pair<int, Continent*> currentpair(continentnumber, &continent);
 		continents.insert(currentpair);
 
-		cout << "\tProcessing continent #" << continentnumber << " " << continent.name << endl;
+		cout << "\tProcessing continent #" << continentnumber << " " << continent << endl;
 
 		continentnumber++;
 	}
@@ -49,7 +49,7 @@ Map& MapLoader::createMap(string filename) {
 		pair<int, Territory*> currentpair(countrynumber, &territory);
 		countries.insert(currentpair);
 
-		cout << "\tProcessing country #" << countrynumber << " " << territory.name << " that is part of " << territory.continent->name << endl;
+		cout << "\tProcessing country #" << countrynumber << " " << territory << " that is part of " << *(territory.continent) << endl;
 	}
 
 	// Skip [borders] line
@@ -75,7 +75,7 @@ void MapLoader::processBorders(string& line, unordered_map<int, Territory*> coun
 
 	Territory* origincountry = countries.at(countrynumber);
 
-	cout << "\tProcessing the borders of " << origincountry->name << ". Added borders to the following countries: ";
+	cout << "\tProcessing the borders of " << *origincountry << ". Added borders to the following countries: ";
 
 	for (size_t i = 1, N = split.size(); i < N; i++) {
 		int bordercountrynumber = stoi(split[i]);
@@ -83,7 +83,7 @@ void MapLoader::processBorders(string& line, unordered_map<int, Territory*> coun
 
 		origincountry->adjacentTerritories.push_back(bordercountry);
 
-		cout << bordercountry->name << " ";
+		cout << *bordercountry << " ";
 	}
 
 	cout << endl;

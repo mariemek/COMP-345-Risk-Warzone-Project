@@ -39,6 +39,8 @@ public:
 	OrderList();
 	~OrderList();
 	OrderList(const OrderList& o);
+
+	friend ostream& operator<<(ostream&, OrderList&);
 	OrderList& operator=(const OrderList& o);
 	void move(int from, int to);
 	void remove(int position);

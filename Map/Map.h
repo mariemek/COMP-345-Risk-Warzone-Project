@@ -16,6 +16,8 @@ public:
 	string name;
 	vector<Territory*> territories;
 
+	friend std::ostream& operator<<(std::ostream&, const Continent&);
+
 	Continent(string&);
 	~Continent();
 };
@@ -27,6 +29,8 @@ public:
 	Player* owner; // pointer to the owner of this territory
 	int nbOfArmy; // the number of army in the territory
 	vector<Territory*> adjacentTerritories; // adjacentTerritories 
+
+	friend std::ostream& operator<<(std::ostream&, const Territory&);
 
 	Territory(string&, Continent*);
 	~Territory();//destructor
@@ -43,6 +47,7 @@ private:
 	bool setContainsTerritories(unordered_set <string>, vector<Territory*>&);
 
 public:
+	friend std::ostream& operator<<(std::ostream&, const Map&);
 	vector<Territory*> territories;
 	vector<Continent*> continents;
 

@@ -54,7 +54,20 @@ OrderList::OrderList()	// Constructor				// OrderList Method Implementations
 	cout << "Making an OrderList\n";
 }
 
-// The move function moves the pointer of an Order subclass from one position in the orderList to another
+ostream& operator<<(ostream& out, OrderList& olist) {
+	out << "OrderList: [";
+	bool first = true;
+	for (Order* order : olist.list) {
+		if (!first) {
+			out << ", ";
+		}
+		first = false;
+		out << *order;
+	}
+	out << "]" << endl;
+	return out;
+}
+
 void OrderList::move(int from, int to)
 {
 	if (from < list.size() && from >= 0 && to < list.size() && to >= 0) {

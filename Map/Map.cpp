@@ -88,6 +88,9 @@ void Map::performDFS(const Territory* territory, unordered_set <string>& nameset
     }
 }
 
+std::ostream& operator<<(std::ostream& out, const Map& continent) {
+}
+
 // The map's destructor is the one that handles destroying the territories & continents
 Map::~Map() {
     for (Territory* territory : territories)
@@ -111,6 +114,11 @@ Continent::~Continent() {
     cout << "Destroyed Continent: " << this->name << endl;
 }
 
+// Print the Territory type as a string
+std::ostream& operator<<(std::ostream& out, const Continent& continent) {
+    return out << continent.name;
+}
+
 // Territory implementation
 Territory::Territory(string& name, Continent* continent) {
     this->name = name;
@@ -124,4 +132,9 @@ Territory::Territory(string& name, Continent* continent) {
 Territory::~Territory() {
     continent = NULL;
     owner = NULL;
+}
+
+// Print the Territory type as a string
+std::ostream& operator<<(std::ostream& out, const Territory& territory) {
+    return out << territory.name;
 }
