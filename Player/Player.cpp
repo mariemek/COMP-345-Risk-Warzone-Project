@@ -32,7 +32,7 @@ vector<Territory*>& Player::toDefend() {
 	return *(new vector<Territory*>(territories.begin(), territories.end()));
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, Territory& location)
+void Player::issueOrder(orderTypes o, Player* issuingPlayer, Territory* location)
 {
 	switch (o)
 	{
@@ -51,7 +51,7 @@ void Player::issueOrder(orderTypes o, Player& issuingPlayer, Territory& location
 	}
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Territory& location)
+void Player::issueOrder(orderTypes o, Player* issuingPlayer, int numOfArmies, Territory* location)
 {
 	switch (o)
 	{
@@ -65,7 +65,7 @@ void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Te
 	}
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Territory& to, Territory& from)
+void Player::issueOrder(orderTypes o, Player* issuingPlayer, int numOfArmies, Territory* to, Territory* from)
 {
 
 	switch (o)
@@ -85,7 +85,7 @@ void Player::issueOrder(orderTypes o, Player& issuingPlayer, int numOfArmies, Te
 	};
 }
 
-void Player::issueOrder(orderTypes o, Player& issuingPlayer, Player& targetPlayer)
+void Player::issueOrder(orderTypes o, Player* issuingPlayer, Player* targetPlayer)
 {
 	switch (o)
 	{

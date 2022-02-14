@@ -20,12 +20,12 @@ int main()
 
 	OrderList* o = new OrderList();
 
-	Deploy* deploy = new Deploy(*p1, 1, *canada);
-	Advance* advance = new Advance(*p1, 1, *canada, *unitedStates);
-	Bomb* bomb = new Bomb(*p1, *canada);
-	Blockade* blockade = new Blockade(*p1, *canada);
-	Airlift* airlift = new Airlift(*p1, 1, *canada, *unitedStates);
-	Negotiate* negotiate = new Negotiate(*p1, *p2);
+	Deploy* deploy = new Deploy(p1, 1, canada);
+	Advance* advance = new Advance(p1, 1, canada, unitedStates);
+	Bomb* bomb = new Bomb(p1, canada);
+	Blockade* blockade = new Blockade(p1, canada);
+	Airlift* airlift = new Airlift(p1, 1, canada, unitedStates);
+	Negotiate* negotiate = new Negotiate(p1, p2);
 	cout << "--Copy constructor--" << endl;
 	Deploy* deploy2 = new Deploy(*deploy);
 
@@ -44,7 +44,7 @@ int main()
 	o->list.push_back(deploy2);
 	deploy2 = NULL;
 	cout << "--execute() and validate()--" << endl;
-	deploy->execute(*p1, 1, *canada);
+	deploy->execute(p1, 1, canada);
 
 	cout << o->list.size() << endl;
 	cout << *o->list.at(0) << endl;
