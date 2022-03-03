@@ -44,7 +44,9 @@ int main()
 	o->list.push_back(deploy2);
 	deploy2 = NULL;
 	cout << "--execute() and validate()--" << endl;
-	deploy->execute();
+	//deploy->execute();
+	// I'm assuming the above line shouldve been the below, since deploy is set to null. Was causing issues with logging.
+	o->list.front()->execute();
 
 	cout << o->list.size() << endl;
 	cout << *o->list.at(0) << endl;

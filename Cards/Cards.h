@@ -14,13 +14,12 @@ class Player;
 
 class Card {
     public:
-        enum CardType {
+        enum class CardType {
             Airlift,
             Blockade,
             Bomb,
             Diplomacy,
-            Reinforcement,
-            LAST = 5
+            Reinforcement
         };        
 
         Card(CardType);

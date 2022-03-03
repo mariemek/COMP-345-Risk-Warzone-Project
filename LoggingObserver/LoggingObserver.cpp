@@ -67,9 +67,8 @@ LogObserver::LogObserver(const LogObserver& o) {}
 LogObserver::~LogObserver() {}
 
 void LogObserver::update(ILoggable* il) {
-	std::ofstream file;
-	file.open("../gamelog.txt");
-	file << il->stringToLog();
+	std::ofstream file("gamelog.txt", std::ios_base::app);
+	file << il->stringToLog() << std::endl;
 	file.close();
 }
 // Assignment Operator

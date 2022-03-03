@@ -8,15 +8,17 @@
 
 #pragma once
 
-#include<iostream>
+#include <iostream>
+#include "../LoggingObserver/LoggingObserver.h"
 using namespace std;
 
-class GameEngine{
+class GameEngine : public Subject, public ILoggable {
 
 private:
     enum currentStates{ //all the different states
-    START,MAP_LOADED, MAP_VALIDATED,PLAYERS_ADDED,ASSIGN_REINFORCEMENT,ISSUE_ORDERS,EXECUTE_ORDERS,WIN
-};
+        START,MAP_LOADED, MAP_VALIDATED,PLAYERS_ADDED,ASSIGN_REINFORCEMENT,ISSUE_ORDERS,EXECUTE_ORDERS,WIN
+    };
+    currentStates* state;
 
 public:
     GameEngine(); //default constructor
@@ -29,6 +31,9 @@ public:
 
     void start(); //start the gameEngine in the first state
    
+    std::string stateToString();
+    std::string stringToLog() override;
+
  /* 
     void mapLoadedPhase();
     void mapValidatedPhase();

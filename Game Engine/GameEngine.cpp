@@ -3,7 +3,7 @@
 using namespace std;
 
 GameEngine::GameEngine() {
-
+    state = new currentStates(START);
 }
 
 GameEngine::GameEngine(const GameEngine &game1){
@@ -15,7 +15,7 @@ GameEngine& GameEngine::operator= (const GameEngine& game1){
 }
 
 GameEngine::~GameEngine(){
-
+    delete state;
 }
 
 ostream & operator << (ostream &out, const GameEngine &g){
@@ -28,7 +28,6 @@ istream & operator >> (istream &in, GameEngine &g){
 
 // Method to start the GameEngine 
 void GameEngine::start(){
-    currentStates current = START;  // we start the current state in start automatically
    
     bool gameRunning = true; //boolean to end the loop when the game ends
     cout << "Welcome to Warzone. " << endl;
@@ -38,7 +37,7 @@ void GameEngine::start(){
     while (gameRunning)
     {
         // switch statement where each case represent a state where it will execute the code and ask a command from the user which determine if it stays in the same state or transition to another
-        switch (current)
+        switch (*state)
         {
         case START:
             cout << "Starting the startup phase" << endl;
@@ -54,7 +53,8 @@ void GameEngine::start(){
             {
             case 1:
                 // go to the MapLoaded state
-                current = MAP_LOADED;
+                *state = MAP_LOADED;
+                notify(this);
                 break;
 
             default:
@@ -82,7 +82,8 @@ void GameEngine::start(){
                 break;
             case 2:
                 // go to validate the map
-                current = MAP_VALIDATED;
+                *state = MAP_VALIDATED;
+                notify(this);
                 break;
             default:
                 cout << "\nThis is not a valid command\n" << endl;
@@ -101,7 +102,8 @@ void GameEngine::start(){
             {
             case 3:
             //go to add player
-                current = PLAYERS_ADDED;
+                *state = PLAYERS_ADDED;
+                notify(this);
                 break;
 
             default:
@@ -124,7 +126,8 @@ void GameEngine::start(){
                 break;
             case 4:
             //go to next state
-                current = ASSIGN_REINFORCEMENT;
+                *state = ASSIGN_REINFORCEMENT;
+                notify(this);
                 break;
             default:
             cout << "\nThis is not a valid command\n" << endl;
@@ -141,7 +144,8 @@ void GameEngine::start(){
             switch (option)
             {
             case 5: //go to the next state
-                current = ISSUE_ORDERS;
+                *state = ISSUE_ORDERS;
+                notify(this);
                 break;
             default:
             cout << "\nThis is not a valid command\n" << endl;
@@ -163,7 +167,8 @@ void GameEngine::start(){
                 // game->issueOrdersPhase();
                 break;
             case 6:  //move to the next state
-                current = EXECUTE_ORDERS;
+                *state = EXECUTE_ORDERS;
+                notify(this);
                 break;
             default:
             cout << "\nThis is not a valid command\n" << endl;
@@ -183,10 +188,12 @@ void GameEngine::start(){
                 break;
             case 8:  //move back to previous state
                 cout << "Ending execution orders";
-                current = ASSIGN_REINFORCEMENT;
+                *state = ASSIGN_REINFORCEMENT;
+                notify(this);
                 break;
             case 9:  //move to next state
-                current = WIN;
+                *state = WIN;
+                notify(this);
                 break;
             default:
             cout << "\nThis is not a valid command\n" << endl;
@@ -203,7 +210,8 @@ void GameEngine::start(){
             {
             case 10:  //move back to start state
                 cout << "Restarting a new game...";
-                current = START;
+                *state = START;
+                notify(this);
                 break;
             case 11: //move out of the loop and end the game
                 cout << "End of the game...";
@@ -212,8 +220,26 @@ void GameEngine::start(){
             }
             break;
         default:
-        cout << "This is not a valid state" << endl;
-            break;
+            cout << "This is not a valid state" << endl;
+                break;
         }
     }
+}
+
+std::string GameEngine::stateToString() {
+    switch (*state) {
+        case currentStates::START:                  return "START";
+        case currentStates::MAP_LOADED:             return "MAP_LOADED";
+        case currentStates::MAP_VALIDATED:          return "MAP_VALIDATED";
+        case currentStates::PLAYERS_ADDED:          return "PLAYERS_ADDED";
+        case currentStates::ASSIGN_REINFORCEMENT:   return "ASSIGN_REINFORCEMENT";
+        case currentStates::ISSUE_ORDERS:           return "ISSUE_ORDERS";
+        case currentStates::EXECUTE_ORDERS:         return "EXECUTE_ORDERS";
+        case currentStates::WIN:                    return "WIN";    
+        default:                                    return "Error reading state.";
+    }
+}
+
+std::string GameEngine::stringToLog() {
+    return "GameEngine: Current state: " + stateToString();
 }

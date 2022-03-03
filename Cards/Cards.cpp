@@ -10,7 +10,7 @@ Deck::Deck() {
     for (int i = 0; i < DECK_SIZE; i++) {
 
         // Alternate through the types
-        Card* c = new Card(static_cast<Card::CardType>(i % Card::CardType::LAST));
+        Card* c = new Card(static_cast<Card::CardType>(i % 5));
         addCard(c);
     }
 
@@ -139,27 +139,27 @@ void Card::play(Player* player, Deck* deck) {
     // will add the card type to the order list later
     switch(this->getCardType()) { 
         case CardType::Airlift:
-            player->orderList->list.push_back(new Order());
+            player->orderList->list.push_back(new Airlift(NULL, 0, NULL, NULL));
             std::cout << "Airlift order created" << std::endl;
             break;
 
         case CardType::Blockade:
-            player->orderList->list.push_back(new Order());
+            player->orderList->list.push_back(new Blockade(NULL, NULL));
             std::cout << "Blockade order created" << std::endl;
             break;
 
         case CardType::Bomb:
-            player->orderList->list.push_back(new Order());
+            player->orderList->list.push_back(new Bomb(NULL, NULL));
             std::cout << "Bomb order created" << std::endl;
             break;
 
         case CardType::Diplomacy:
-            player->orderList->list.push_back(new Order());
+            player->orderList->list.push_back(new Negotiate(NULL, NULL));
             std::cout << "Diplomacy order created" << std::endl;
             break;
 
         case CardType::Reinforcement:
-            player->orderList->list.push_back(new Order());
+            player->orderList->list.push_back(new Advance(NULL, 0, NULL, NULL));
             std::cout << "Reinforcement order created" << std::endl;
             break;
 
